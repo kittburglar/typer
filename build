@@ -1,0 +1,8 @@
+#!/bin/bash
+# Build Script"
+
+GAMENAME=game
+zip $GAMENAME.zip *
+#open -W -a "love" $GAMENAME.zip
+/Applications/love.app/Contents/MacOS/love $GAMENAME.zip
+
