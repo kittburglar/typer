@@ -6,12 +6,12 @@ function player.draw()
 end
 
 function player.load()
-	player.x = 200
-	player.y = 200
 	player.width = 20
 	player.height = 20
+	player.x = love.graphics.getWidth()/2 - player.width/2
+	player.y = love.graphics.getHeight()/2 - player.height/2
 end
 
 function player.update(dt)
-	
+
 end
