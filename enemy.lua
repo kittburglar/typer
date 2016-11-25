@@ -2,6 +2,7 @@ require "player"
 require "explosion"
 
 enemy = {}
+enemyColors = {{200, 40, 41},{245, 135, 31},{234, 183, 0},{113, 140, 0},{62, 153, 159},{137, 89, 168}}
 
 function enemy.create(x, y, width, height, red, green, blue, word)
     table.insert(enemy, {
@@ -81,5 +82,20 @@ function enemy.checkCollision()
             print("Enemy: Collision detected")
             table.remove(enemy, i)
         end
+    end
+end
+
+function enemy.randomCreate()
+    local randomSpawn = math.random(0, 3)
+    print("Enemy colour is:", enemyColors[1])
+    local randomColor = enemyColors[math.random(1, 6)]
+    if randomSpawn == 0 then
+        enemy.create(0, math.random(0, love.graphics.getWidth()), 20, 20, randomColor[1], randomColor[2], randomColor[3], "hello") 
+    elseif randomSpawn == 1 then
+        enemy.create(math.random(0, love.graphics.getWidth()), 0, 20, 20, randomColor[1], randomColor[2], randomColor[3], "poop")
+    elseif randomSpawn == 2 then
+        enemy.create(love.graphics.getWidth(), math.random(0, love.graphics.getHeight()), 20, 20, randomColor[1], randomColor[2], randomColor[3], "world")
+    elseif randomSpawn == 3 then
+        enemy.create(math.random(0, love.graphics.getWidth()), love.graphics.getHeight(), 20, 20, randomColor[1], randomColor[2], randomColor[3], "letter")
     end
 end
