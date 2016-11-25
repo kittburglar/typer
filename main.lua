@@ -20,12 +20,9 @@ end
 
 function love.load()
 	main.gameover = false;
-
+	
+	enemy.load()
 	math.randomseed(os.time())
-	enemy.randomCreate()
-	enemy.randomCreate()
-	enemy.randomCreate()
-	enemy.randomCreate()
 
 	player.load()
 	health.load()
@@ -34,6 +31,8 @@ end
 function love.update(dt)
 	print("IS GAMEOVER?", main.gameover)
 	if not main.gameover then
+		
+		enemy.spawnCheck()
 		enemy.update(dt)
 		player.update(dt)
 		health.update(dt)

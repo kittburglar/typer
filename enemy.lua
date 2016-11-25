@@ -5,6 +5,10 @@ require "words"
 enemy = {}
 enemyColors = {{200, 40, 41},{245, 135, 31},{234, 183, 0},{113, 140, 0},{62, 153, 159},{137, 89, 168}}
 
+function enemy.load()
+    enemy.spawnTimer = love.timer.getTime()
+end
+
 function enemy.create(x, y, width, height, red, green, blue, word)
     table.insert(enemy, {
         x = x,
@@ -87,7 +91,7 @@ function enemy.checkCollision()
 end
 
 function enemy.randomCreate()
-    
+
     local randomSpawn = math.random(0, 3)
     print("Enemy colour is:", enemyColors[1])
     local randomColor = enemyColors[math.random(1, 6)]
@@ -100,4 +104,12 @@ function enemy.randomCreate()
     elseif randomSpawn == 3 then
         enemy.create(math.random(0, love.graphics.getWidth()), love.graphics.getHeight(), 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord())
     end
+end
+
+function enemy.spawnCheck()
+    if love.timer.getTime() - enemy.spawnTimer >= 2 then
+            print("Spawning enemy!")
+            enemy.spawnTimer = love.timer.getTime()
+            enemy.randomCreate()
+        end
 end
