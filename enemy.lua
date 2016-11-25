@@ -17,7 +17,7 @@ end
 function enemy.draw()
     for i,e in ipairs(enemy) do
         print("hello", e.x, e.y, e.width, e.height)
-        love.graphics.setColor(255, 255, 255)
+        love.graphics.setColor(200, 40, 41)
         love.graphics.rectangle("fill", e.x, e.y, e.width, e.height)
         love.graphics.print(e.word, e.x, e.y + e.height)
     end
