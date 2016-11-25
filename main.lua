@@ -2,6 +2,7 @@
 require "enemy"
 require "player"
 require "health"
+require "points"
 
 main = {}
 
@@ -10,6 +11,7 @@ function love.draw()
     player.draw()
     health.draw()
     explosion.draw()
+    points.draw()
     if main.gameover then
     	w = love.graphics.getWidth()
     	love.graphics.setNewFont(100)
@@ -26,6 +28,7 @@ function love.load()
 
 	player.load()
 	health.load()
+	points.load()
 end
 
 function love.update(dt)

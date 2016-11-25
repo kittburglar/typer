@@ -1,6 +1,7 @@
 require "player"
 require "explosion"
 require "words"
+require "points"
 
 enemy = {}
 enemyColors = {{200, 40, 41},{245, 135, 31},{234, 183, 0},{113, 140, 0},{62, 153, 159},{137, 89, 168}}
@@ -21,9 +22,10 @@ function enemy.create(x, y, width, height, red, green, blue, word)
         red = red,
         green = green,
         blue = blue,
-        speed = .5,
+        speed = .5 + ((points.currentPoints)/50) * .1,
         deathAnimationTimer = 0,
-        deathStartTime = 0
+        deathStartTime = 0,
+        points = enemy.getPoints(word)
     })
 end
 
@@ -70,6 +72,7 @@ function enemy.keypressed(key)
 
         if e.wordRemaining == "" then
             explosion.spawn(e.x + e.width/2, e.y + e.height/2, e.red, e.green, e.blue)
+            points.changed(points.currentPoints + e.points)
             table.remove(enemy, i)
         end
     end
@@ -99,15 +102,38 @@ function enemy.randomCreate()
 end
 
 function enemy.spawnCheck()
-    if love.timer.getTime() - enemy.spawnTimer >= 2 then
+    if love.timer.getTime() - enemy.spawnTimer >= 3 - ((points.currentPoints)/100)*.1 then
             print("Spawning enemy!")
             enemy.spawnTimer = love.timer.getTime()
-            enemy.randomCreate()
+           
+            for i = 1, math.random(1, 1 + math.min(((points.currentPoints)/50)*1, 3)) do
+                enemy.randomCreate()
+            end
         end
 end
 
+-- F ×2, H ×2, V ×2, W ×2, Y ×2
+
 function enemy.getPoints(word)
+    local points = 0
     for i = 1, string.len(word) do
-        print(string.sub(word, i, i))
+        local letter = string.sub(word, i, i)
+        if (letter == "e" or letter == "a" or letter == "i" or letter == "o" or letter == "n" or letter == "r" or letter == "t" or letter == "l" or letter == "s" or letter == "u") then
+            points = points + 1
+        elseif (letter == "d" or letter == "g") then
+            points = points + 2
+        elseif (letter == "b" or letter == "c" or letter == "m" or letter == "p") then
+            points = points + 3
+        elseif (letter == "f" or letter == "h" or letter == "v" or letter == "w" or letter == "y") then
+            points = points + 4 
+        elseif (letter == "k") then
+            points = points + 5 
+        elseif (letter == "j" or letter == "x") then
+            points = points + 8 
+        elseif (letter == "q" or letter == "z") then
+            points = points + 10 
+        end
     end
+    print ("Points for ", word, " are ", points)
+    return points
 end
