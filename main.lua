@@ -1,10 +1,12 @@
 
 require "enemy"
 require "player"
+require "health"
 
 function love.draw()
     enemy.draw()
     player.draw()
+    health.draw()
 end
 
 function love.load()
@@ -16,11 +18,13 @@ function love.load()
 	enemy.create(350, 100, 20, 20, 137, 89, 168, "enemy")
 
 	player.load()
+	health.load()
 end
 
 function love.update(dt)
 	enemy.update(dt)
 	player.update(dt)
+	health.update(dt)
 end
 
 function love.keypressed( key )
