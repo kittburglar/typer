@@ -1,5 +1,6 @@
 require "player"
 require "explosion"
+require "words"
 
 enemy = {}
 enemyColors = {{200, 40, 41},{245, 135, 31},{234, 183, 0},{113, 140, 0},{62, 153, 159},{137, 89, 168}}
@@ -90,12 +91,12 @@ function enemy.randomCreate()
     print("Enemy colour is:", enemyColors[1])
     local randomColor = enemyColors[math.random(1, 6)]
     if randomSpawn == 0 then
-        enemy.create(0, math.random(0, love.graphics.getWidth()), 20, 20, randomColor[1], randomColor[2], randomColor[3], "hello") 
+        enemy.create(0, math.random(0, love.graphics.getWidth()), 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord()) 
     elseif randomSpawn == 1 then
-        enemy.create(math.random(0, love.graphics.getWidth()), 0, 20, 20, randomColor[1], randomColor[2], randomColor[3], "poop")
+        enemy.create(math.random(0, love.graphics.getWidth()), 0, 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord())
     elseif randomSpawn == 2 then
-        enemy.create(love.graphics.getWidth(), math.random(0, love.graphics.getHeight()), 20, 20, randomColor[1], randomColor[2], randomColor[3], "world")
+        enemy.create(love.graphics.getWidth(), math.random(0, love.graphics.getHeight()), 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord())
     elseif randomSpawn == 3 then
-        enemy.create(math.random(0, love.graphics.getWidth()), love.graphics.getHeight(), 20, 20, randomColor[1], randomColor[2], randomColor[3], "letter")
+        enemy.create(math.random(0, love.graphics.getWidth()), love.graphics.getHeight(), 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord())
     end
 end
