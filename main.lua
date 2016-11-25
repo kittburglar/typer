@@ -21,9 +21,7 @@ end
 function love.load()
 	main.gameover = false;
 
-	enemy.randomCreate()
-	enemy.randomCreate()
-	enemy.randomCreate()
+	math.randomseed(os.time())
 	enemy.randomCreate()
 	enemy.randomCreate()
 	enemy.randomCreate()

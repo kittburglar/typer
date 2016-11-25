@@ -87,6 +87,7 @@ function enemy.checkCollision()
 end
 
 function enemy.randomCreate()
+    
     local randomSpawn = math.random(0, 3)
     print("Enemy colour is:", enemyColors[1])
     local randomColor = enemyColors[math.random(1, 6)]
