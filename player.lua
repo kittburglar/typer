@@ -22,7 +22,6 @@ function player.checkCollision()
         if (helper.collisionDetection(e, player)) then
         	print("Player: Collision detected")
         	if health.wasUpdated == NO then
-        		health.wasUpdated = YES
         	 	health.change(health.lifepoints - 1)
         	end
         end

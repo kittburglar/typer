@@ -1,4 +1,5 @@
 require "player"
+require "explosion"
 
 enemy = {}
 
@@ -14,7 +15,9 @@ function enemy.create(x, y, width, height, red, green, blue, word)
         red = red,
         green = green,
         blue = blue,
-        speed = 2
+        speed = .5,
+        deathAnimationTimer = 0,
+        deathStartTime = 0
     })
 end
 
@@ -66,6 +69,7 @@ function enemy.keypressed(key)
         end
 
         if e.wordRemaining == "" then
+            explosion.spawn(e.x + e.width/2, e.y + e.height/2, e.red, e.green, e.blue)
             table.remove(enemy, i)
         end
     end

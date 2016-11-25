@@ -9,11 +9,13 @@ function love.draw()
     enemy.draw()
     player.draw()
     health.draw()
+    explosion.draw()
     if main.gameover then
     	w = love.graphics.getWidth()
     	love.graphics.setNewFont(100)
 		love.graphics.printf("GAME OVER :(", 0, love.graphics.getHeight()/2 - 100, w, "center")
 	end
+
 end
 
 function love.load()
@@ -37,6 +39,7 @@ function love.update(dt)
 		enemy.update(dt)
 		player.update(dt)
 		health.update(dt)
+		explosion.update(dt)
 	end
 	
 end
