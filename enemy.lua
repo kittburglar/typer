@@ -1,3 +1,5 @@
+require "player"
+
 enemy = {}
 
 function enemy.create(x, y, width, height, red, green, blue, word)
@@ -11,12 +13,28 @@ function enemy.create(x, y, width, height, red, green, blue, word)
         wordRemaining = word,
         red = red,
         green = green,
-        blue = blue
+        blue = blue,
+        speed = 2
     })
 end
 
 function enemy.update(dt)
+    enemy.checkCollision()
 
+    for i,e in ipairs(enemy) do
+        if e.x < player.x then
+            e.x = e.x + e.speed
+        end
+        if e.y < player.y then
+            e.y = e.y + e.speed
+        end
+        if e.x > player.x then
+            e.x = e.x - e.speed
+        end
+        if e.y > player.y then
+            e.y = e.y - e.speed
+        end
+    end
 end
 
 function enemy.draw()
@@ -38,8 +56,7 @@ function enemy.keypressed(key)
         if enemyFirstLetter == key then
             print("Letter matched!")
             local restOfEnemyWord = e.wordRemaining:sub(2, string.len(e.wordRemaining))
-            print(restOfEnemyWord)
-            -- e.word = restOfEnemyWord
+            print("Leftover word is " .. restOfEnemyWord)
             e.wordCorrectSoFar = e.wordCorrectSoFar .. key
             e.wordRemaining = restOfEnemyWord
         else 
@@ -48,6 +65,15 @@ function enemy.keypressed(key)
         end
 
         if e.wordRemaining == "" then
+            table.remove(enemy, i)
+        end
+    end
+end
+
+function enemy.checkCollision()
+    for i,e in ipairs(enemy) do
+        if (helper.collisionDetection(e, player)) then
+            print("Enemy: Collision detected")
             table.remove(enemy, i)
         end
     end

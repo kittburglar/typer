@@ -1,3 +1,4 @@
+require "helper"
 player = {}
 
 function player.draw()
@@ -13,5 +14,13 @@ function player.load()
 end
 
 function player.update(dt)
+	player.checkCollision()
+end
 
+function player.checkCollision()
+	for i,e in ipairs(enemy) do
+        if (helper.collisionDetection(e, player)) then
+        	print("Player: Collision detected")
+        end
+    end
 end
