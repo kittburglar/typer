@@ -3,6 +3,7 @@ require "enemy"
 require "player"
 require "health"
 require "points"
+require  "bomb"
 
 main = {}
 
@@ -10,8 +11,10 @@ function love.draw()
     enemy.draw()
     player.draw()
     health.draw()
+   
     explosion.draw()
     points.draw()
+    bomb.draw()
     if main.gameover then
     	w = love.graphics.getWidth()
     	love.graphics.setNewFont(100)
@@ -29,6 +32,7 @@ function love.load()
 	player.load()
 	health.load()
 	points.load()
+	bomb.load()
 end
 
 function love.update(dt)
@@ -45,4 +49,8 @@ end
 
 function love.keypressed( key )
 	enemy.keypressed(key)
+	if key == "space" then
+	 	bomb.keypressed(key)
+	end
+	
 end
