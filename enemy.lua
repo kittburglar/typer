@@ -42,6 +42,7 @@ function enemy.draw()
         love.graphics.setColor(e.red, e.green, e.blue)
         love.graphics.rectangle("fill", e.x, e.y, e.width, e.height)
         love.graphics.setColor(255, 255, 255)
+        love.graphics.setNewFont(15)
         love.graphics.print({{255, 255, 255}, e.wordCorrectSoFar,  {e.red, e.green, e.blue}, e.wordRemaining} , e.x, e.y + e.height)
     end
 end

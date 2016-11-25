@@ -1,3 +1,5 @@
+
+
 health = {}
 health.lifepoints = 3
 health.wasUpdated = NO
@@ -31,5 +33,9 @@ function health.change(newHealth)
 end
 
 function health.update(dt)
-
+	print("Health lfiepoitns are: " .. health.lifepoints)
+	if health.lifepoints <= 0 then
+		print("GAMEOVEr")
+	    main.gameover = true
+	end
 end

@@ -3,13 +3,23 @@ require "enemy"
 require "player"
 require "health"
 
+main = {}
+
 function love.draw()
     enemy.draw()
     player.draw()
     health.draw()
+    if main.gameover then
+    	w = love.graphics.getWidth()
+    	love.graphics.setNewFont(100)
+		love.graphics.printf("GAME OVER :(", 0, love.graphics.getHeight()/2 - 100, w, "center")
+	end
 end
 
 function love.load()
+	main.gameover = false;
+	
+
 	enemy.create(100, 100, 20, 20, 200, 40, 41, "hello")
 	enemy.create(150, 100, 20, 20, 245, 135, 31, "poop")
 	enemy.create(200, 100, 20, 20, 234, 183, 0, "world")
@@ -22,9 +32,13 @@ function love.load()
 end
 
 function love.update(dt)
-	enemy.update(dt)
-	player.update(dt)
-	health.update(dt)
+	print("IS GAMEOVER?", main.gameover)
+	if not main.gameover then
+		enemy.update(dt)
+		player.update(dt)
+		health.update(dt)
+	end
+	
 end
 
 function love.keypressed( key )
