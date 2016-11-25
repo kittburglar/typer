@@ -29,7 +29,6 @@ function love.load()
 end
 
 function love.update(dt)
-	print("IS GAMEOVER?", main.gameover)
 	if not main.gameover then
 		
 		enemy.spawnCheck()

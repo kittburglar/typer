@@ -59,14 +59,8 @@ end
 function enemy.keypressed(key)
     for i,e in ipairs(enemy) do
         local enemyFirstLetter = e.wordRemaining:sub(0, 1 )
-        print("letter pressed was: ",key)
-        print("enemy first letter is: ", enemyFirstLetter)
-        print("word corrent so far: ", e.wordCorrectSoFar)
-        print("word remaining are: ", e.wordRemaining)
         if enemyFirstLetter == key then
-            print("Letter matched!")
             local restOfEnemyWord = e.wordRemaining:sub(2, string.len(e.wordRemaining))
-            print("Leftover word is " .. restOfEnemyWord)
             e.wordCorrectSoFar = e.wordCorrectSoFar .. key
             e.wordRemaining = restOfEnemyWord
         else 
@@ -84,7 +78,6 @@ end
 function enemy.checkCollision()
     for i,e in ipairs(enemy) do
         if (helper.collisionDetection(e, player)) then
-            print("Enemy: Collision detected")
             table.remove(enemy, i)
         end
     end
@@ -93,7 +86,6 @@ end
 function enemy.randomCreate()
 
     local randomSpawn = math.random(0, 3)
-    print("Enemy colour is:", enemyColors[1])
     local randomColor = enemyColors[math.random(1, 6)]
     if randomSpawn == 0 then
         enemy.create(0, math.random(0, love.graphics.getWidth()), 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord()) 
@@ -112,4 +104,10 @@ function enemy.spawnCheck()
             enemy.spawnTimer = love.timer.getTime()
             enemy.randomCreate()
         end
+end
+
+function enemy.getPoints(word)
+    for i = 1, string.len(word) do
+        print(string.sub(word, i, i))
+    end
 end

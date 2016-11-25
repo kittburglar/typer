@@ -20,7 +20,6 @@ end
 function player.checkCollision()
 	for i,e in ipairs(enemy) do
         if (helper.collisionDetection(e, player)) then
-        	print("Player: Collision detected")
         	if health.wasUpdated == NO then
         	 	health.change(health.lifepoints - 1)
         	end
