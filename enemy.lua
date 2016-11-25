@@ -4,7 +4,7 @@ require "words"
 require "points"
 
 enemy = {}
-enemyColors = {{200, 40, 41},{245, 135, 31},{234, 183, 0},{113, 140, 0},{62, 153, 159},{137, 89, 168}}
+enemyColors = {{213,78,83},{231,140,69},{231,197,71},{185,202,74},{112,192,177},{122,166,218}, {195,151,216}}
 
 function enemy.load()
     enemy.spawnTimer = love.timer.getTime()
@@ -53,7 +53,7 @@ function enemy.draw()
         love.graphics.setColor(e.red, e.green, e.blue)
         love.graphics.rectangle("fill", e.x, e.y, e.width, e.height)
         love.graphics.setColor(255, 255, 255)
-        love.graphics.setNewFont(15)
+        love.graphics.setNewFont(20)
         love.graphics.print({{255, 255, 255}, e.wordCorrectSoFar,  {e.red, e.green, e.blue}, e.wordRemaining} , e.x, e.y + e.height)
     end
 end
@@ -89,7 +89,7 @@ end
 function enemy.randomCreate()
 
     local randomSpawn = math.random(0, 3)
-    local randomColor = enemyColors[math.random(1, 6)]
+    local randomColor = enemyColors[math.random(1, 7)]
     if randomSpawn == 0 then
         enemy.create(0, math.random(0, love.graphics.getWidth()), 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord()) 
     elseif randomSpawn == 1 then
@@ -106,7 +106,7 @@ function enemy.spawnCheck()
             print("Spawning enemy!")
             enemy.spawnTimer = love.timer.getTime()
            
-            for i = 1, math.random(1, 1 + math.min(((points.currentPoints)/50)*1, 3)) do
+            for i = 1, math.random(1, 1 + math.min(((points.currentPoints)/50)*1, 2)) do
                 enemy.randomCreate()
             end
         end

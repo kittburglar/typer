@@ -2,7 +2,7 @@ require "helper"
 player = {}
 
 function player.draw()
-	love.graphics.setColor(255, 255, 255)
+	love.graphics.setColor(234,234,234)
     love.graphics.rectangle("fill", player.x, player.y, player.width, player.height)
 end
 
