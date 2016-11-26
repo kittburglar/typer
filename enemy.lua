@@ -22,7 +22,7 @@ function enemy.create(x, y, width, height, red, green, blue, word)
         red = red,
         green = green,
         blue = blue,
-        speed = .5 + ((points.currentPoints)/50) * .1,
+        speed = 2 + ((points.currentPoints)/100) * .05,
         deathAnimationTimer = 0,
         deathStartTime = 0,
         points = enemy.getPoints(word)
@@ -102,7 +102,7 @@ function enemy.randomCreate()
 end
 
 function enemy.spawnCheck()
-    if love.timer.getTime() - enemy.spawnTimer >= 3 - ((points.currentPoints)/100)*.1 then
+    if love.timer.getTime() - enemy.spawnTimer >= 3 then
             print("Spawning enemy!")
             enemy.spawnTimer = love.timer.getTime()
            

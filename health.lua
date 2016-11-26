@@ -7,12 +7,14 @@ local lifepointspacing = 15
 
 function health.draw()
 	local i = 0
-	while i < health.lifepoints do
-		love.graphics.setLineWidth(6)
+	while i < 3 do
+		love.graphics.setLineWidth(4)
 		love.graphics.setColor(234,234,234)
 		love.graphics.rectangle("line", health.x + (health.width + lifepointspacing) * i, health.y, health.width, health.height)
-		love.graphics.setColor(213,78,83)
-		love.graphics.rectangle("fill", health.x + (health.width + lifepointspacing) * i, health.y, health.width, health.height)
+		if i < health.lifepoints then
+			love.graphics.setColor(213,78,83)
+			love.graphics.rectangle("fill", health.x + (health.width + lifepointspacing) * i, health.y, health.width, health.height)
+		end
 		i = i + 1
 	end
 end

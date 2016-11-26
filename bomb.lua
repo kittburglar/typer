@@ -8,12 +8,14 @@ local bombpointspacing = 15
 
 function bomb.draw()
 	local i = 0
-	while i < bomb.bombpoints do
-		love.graphics.setLineWidth(6)
+	while i < 3 do
+		love.graphics.setLineWidth(4)
 		love.graphics.setColor(234,234,234)
 		love.graphics.rectangle("line", bombpointspacing + (bomb.width + bombpointspacing) * i, bomb.y, bomb.width, bomb.height)
-		love.graphics.setColor(122,166,218)
-		love.graphics.rectangle("fill", bombpointspacing + (bomb.width + bombpointspacing) * i, bomb.y, bomb.width, bomb.height)
+		if i < bomb.bombpoints then
+			love.graphics.setColor(122,166,218)
+			love.graphics.rectangle("fill", bombpointspacing + (bomb.width + bombpointspacing) * i, bomb.y, bomb.width, bomb.height)
+		end
 		i = i + 1
 	end
 end
