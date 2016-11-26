@@ -33,6 +33,7 @@ function love.load()
 	health.load()
 	points.load()
 	bomb.load()
+	explosion.load()
 end
 
 function love.update(dt)
@@ -42,9 +43,9 @@ function love.update(dt)
 		enemy.update(dt)
 		player.update(dt)
 		health.update(dt)
-		explosion.update(dt)
+		
 	end
-	
+	explosion.update(dt)
 end
 
 function love.keypressed( key )
@@ -52,5 +53,7 @@ function love.keypressed( key )
 	if key == "space" then
 	 	bomb.keypressed(key)
 	end
-	
+	if key == "2" then
+	    love.load()
+	end
 end

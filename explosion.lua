@@ -1,13 +1,20 @@
 explosion = {}
 
-function explosion.spawn(x, y, red, green, blue)
+function explosion.load()
+	for i,e in ipairs(explosion) do
+        explosion[i] = nil
+    end
+end
+
+function explosion.spawn(x, y, red, green, blue, segments)
 	table.insert(explosion, {
 	        x = x,
 	        y = y,
 	        radius = 0, 
 	        red = red,
 	        green = green,
-	        blue = blue
+	        blue = blue,
+	        segments = segments
 	})
 end
 
@@ -20,6 +27,6 @@ end
 function explosion.draw()
 	for i,explo in ipairs(explosion) do
 		love.graphics.setColor(explo.red,explo.green, explo.blue)
-        love.graphics.circle("line", explo.x, explo.y, explo.radius, 100)
+        love.graphics.circle("line", explo.x, explo.y, explo.radius, explo.segments)
     end
 end

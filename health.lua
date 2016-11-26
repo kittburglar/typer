@@ -1,4 +1,5 @@
-
+require "player"
+require "explosion"
 
 health = {}
 health.lifepoints = 3
@@ -36,5 +37,8 @@ end
 function health.update(dt)
 	if health.lifepoints <= 0 then
 	    main.gameover = true
+	    explosion.spawn(player.x + player.width/2, player.y + player.height/2, 255, 255, 255)
+	    player.width = 0
+	    player.height = 0
 	end
 end

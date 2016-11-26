@@ -1,8 +1,10 @@
 require "helper"
+require "explosion"
+
 player = {}
 
 function player.draw()
-	love.graphics.setColor(234,234,234)
+	love.graphics.setColor(player.red,player.green,player.blue)
     love.graphics.rectangle("fill", player.x, player.y, player.width, player.height)
 end
 
@@ -11,6 +13,9 @@ function player.load()
 	player.height = 20
 	player.x = love.graphics.getWidth()/2 - player.width/2
 	player.y = love.graphics.getHeight()/2 - player.height/2
+	player.red = 234
+	player.green = 234
+	player.blue = 234
 end
 
 function player.update(dt)
@@ -21,6 +26,8 @@ function player.checkCollision()
 	for i,e in ipairs(enemy) do
         if (helper.collisionDetection(e, player)) then
         	if health.wasUpdated == NO then
+        		explosion.spawn(e.x, e.y, e.red, e.green, e.blue)
+        		explosion.spawn(player.x, player.y, player.red, player.green, player.blue)
         	 	health.change(health.lifepoints - 1)
         	end
         end

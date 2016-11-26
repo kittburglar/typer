@@ -7,6 +7,9 @@ enemy = {}
 enemyColors = {{213,78,83},{231,140,69},{231,197,71},{185,202,74},{112,192,177},{122,166,218}, {195,151,216}}
 
 function enemy.load()
+    for i,e in ipairs(enemy) do
+        enemy[i] = nil
+    end
     enemy.spawnTimer = love.timer.getTime()
 end
 
@@ -14,15 +17,15 @@ function enemy.create(x, y, width, height, red, green, blue, word)
     table.insert(enemy, {
         x = x,
         y = y,
-        width = width,
-        height = height,
         word = word,
+        width = string.len(word) * 5,
+        height = string.len(word) * 5,
         wordCorrectSoFar = " ",
         wordRemaining = word,
         red = red,
         green = green,
         blue = blue,
-        speed = .5 + ((points.currentPoints)/100) * .05,
+        speed = 2 + ((points.currentPoints)/100) * .05,
         deathAnimationTimer = 0,
         deathStartTime = 0,
         points = enemy.getPoints(word)
