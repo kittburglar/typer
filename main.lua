@@ -1,9 +1,11 @@
 
+require "restart"
 require "enemy"
 require "player"
 require "health"
 require "points"
-require  "bomb"
+require "bomb"
+
 
 main = {}
 
@@ -16,9 +18,7 @@ function love.draw()
     points.draw()
     bomb.draw()
     if main.gameover then
-    	w = love.graphics.getWidth()
-    	love.graphics.setNewFont(100)
-		love.graphics.printf("GAME OVER :(", 0, love.graphics.getHeight()/2 - 100, w, "center")
+    	restart.draw()
 	end
 
 end
@@ -28,7 +28,7 @@ function love.load()
 	
 	enemy.load()
 	math.randomseed(os.time())
-
+	restart.load()
 	player.load()
 	health.load()
 	points.load()
@@ -55,5 +55,9 @@ function love.keypressed( key )
 	end
 	if key == "2" then
 	    love.load()
+	end
+
+	if main.gameover then
+	    restart.keypressed(key)
 	end
 end

@@ -2,7 +2,6 @@ require "player"
 require "explosion"
 
 health = {}
-health.lifepoints = 3
 health.wasUpdated = NO
 local lifepointspacing = 15
 
