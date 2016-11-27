@@ -19,7 +19,7 @@ function restart.draw()
 	love.graphics.setColor(234,234,234)
 	love.graphics.printf({{213,78,83}, restart.wordCorrectSoFar, {234,234,234}, restart.wordRemaining} , restart.x, restart.y + restart.height, w, "center")
 	love.graphics.setColor(213,78,83)
-	love.graphics.printf("GAME OVER :(", 0, love.graphics.getHeight()/2 - 100, w, "center")
+	love.graphics.printf("GAME OVER", 0, love.graphics.getHeight()/2 - 100, w, "center")
 end
 
 function restart.keypressed(key)
@@ -29,7 +29,7 @@ function restart.keypressed(key)
         local restOfEnemyWord = restart.wordRemaining:sub(2, string.len(restart.wordRemaining))
         restart.wordCorrectSoFar = restart.wordCorrectSoFar .. key
         restart.wordRemaining = restOfEnemyWord
-        print("Key pressed is ", key, " correct so far is is: ", restart.wordCorrectSoFar, " word remaining is ", restart.wordRemaining)
+        -- print("Key pressed is ", key, " correct so far is is: ", restart.wordCorrectSoFar, " word remaining is ", restart.wordRemaining)
     else 
         restart.wordCorrectSoFar = " "
         restart.wordRemaining = restart.word

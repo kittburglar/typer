@@ -54,6 +54,13 @@ function enemy.draw()
     end
 end
 
+function enemy.resetAll()
+    for i,e in ipairs(enemy) do
+        e.wordCorrectSoFar = " "
+        e.wordRemaining = e.word
+    end
+end
+
 function enemy.keypressed(key)
     for i,e in ipairs(enemy) do
         local enemyFirstLetter = e.wordRemaining:sub(0, 1 )
@@ -69,7 +76,11 @@ function enemy.keypressed(key)
         if e.wordRemaining == "" then
             explosion.spawn(e.x + e.width/2, e.y + e.height/2, e.red, e.green, e.blue)
             points.changed(points.currentPoints + e.points)
+            coin:setVolume(0.3)
+            coin:setPitch(math.random(4,6)/10)
+            coin:play()
             table.remove(enemy, i)
+            enemy.resetAll()
         end
     end
 end
@@ -99,7 +110,6 @@ end
 
 function enemy.spawnCheck()
     if love.timer.getTime() - enemy.spawnTimer >= 3 then
-            -- print("Spawning enemy!")
             enemy.spawnTimer = love.timer.getTime()
            
             for i = 1, math.random(1, 1 + math.min(((points.currentPoints)/50)*1, 2)) do

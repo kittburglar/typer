@@ -39,6 +39,9 @@ end
 
 function bomb.keypressed(key)
 	if bomb.bombpoints > 0 then
+		-- explosionsound:setVolume(0.3)
+  --       explosionsound:setPitch(.5)
+  --       explosionsound:play()
 		explosion.spawn(player.x + player.width/2, player.y + player.height/2, player.red, player.green, player.blue, 3)
 	    for i,e in ipairs(enemy) do
         explosion.spawn(e.x + e.width/2, e.y + e.height/2, e.red, e.green, e.blue)

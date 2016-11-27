@@ -10,6 +10,9 @@ require "bomb"
 main = {}
 music = love.audio.newSource("signed.mp3")
 
+explosionsound = love.audio.newSource("explosion.wav", "static")
+coin = love.audio.newSource("coin.wav", "static")
+
 function love.draw()
     enemy.draw()
     player.draw()
@@ -36,7 +39,7 @@ function love.load()
 	bomb.load()
 	explosion.load()
 	
-	music:rewind()
+	music:setVolume(0.3)
 	music:play()
 end
 

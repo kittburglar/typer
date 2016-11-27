@@ -7,6 +7,9 @@ function explosion.load()
 end
 
 function explosion.spawn(x, y, red, green, blue, segments)
+	coin:setVolume(0.1)
+    coin:setPitch(math.random(1,10)/10)
+    coin:play()
 	table.insert(explosion, {
 	        x = x,
 	        y = y,
