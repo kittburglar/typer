@@ -26,6 +26,9 @@ end
 
 function explosion.draw()
 	for i,explo in ipairs(explosion) do
+		if explo.radius >= love.graphics.getWidth() then
+		    explosion[i] = nil
+		end
 		love.graphics.setColor(explo.red,explo.green, explo.blue)
         love.graphics.circle("line", explo.x, explo.y, explo.radius, explo.segments)
     end
