@@ -39,7 +39,7 @@ function love.load()
 	bomb.load()
 	explosion.load()
 	
-	music:setVolume(0.3)
+	music:setVolume(0.5)
 	music:play()
 end
 
