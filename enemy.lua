@@ -25,7 +25,7 @@ function enemy.create(x, y, width, height, red, green, blue, word)
         red = red,
         green = green,
         blue = blue,
-        speed = 2 + ((points.currentPoints)/100) * .05,
+        speed = 1 + ((points.currentPoints)/100) * .05,
         deathAnimationTimer = 0,
         deathStartTime = 0,
         points = enemy.getPoints(word)
@@ -34,20 +34,13 @@ end
 
 function enemy.update(dt)
     enemy.checkCollision()
-
     for i,e in ipairs(enemy) do
-        if e.x < player.x then
-            e.x = e.x + e.speed
-        end
-        if e.y < player.y then
-            e.y = e.y + e.speed
-        end
-        if e.x > player.x then
-            e.x = e.x - e.speed
-        end
-        if e.y > player.y then
-            e.y = e.y - e.speed
-        end
+        -- Rotate us to face the player
+        e.rotation = math.atan2(player.y - e.y, player.x - e.x);
+
+        -- Move towards the player
+        e.x = e.x + math.cos(e.rotation) * e.speed;
+        e.y = e.y + math.sin(e.rotation) * e.speed;
     end
 end
 
@@ -94,9 +87,9 @@ function enemy.randomCreate()
     local randomSpawn = math.random(0, 3)
     local randomColor = enemyColors[math.random(1, 7)]
     if randomSpawn == 0 then
-        enemy.create(0, math.random(0, love.graphics.getWidth()), 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord()) 
+        enemy.create(-50, math.random(0, love.graphics.getWidth()), 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord()) 
     elseif randomSpawn == 1 then
-        enemy.create(math.random(0, love.graphics.getWidth()), 0, 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord())
+        enemy.create(math.random(0, love.graphics.getWidth()), -50, 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord())
     elseif randomSpawn == 2 then
         enemy.create(love.graphics.getWidth(), math.random(0, love.graphics.getHeight()), 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord())
     elseif randomSpawn == 3 then
@@ -106,7 +99,7 @@ end
 
 function enemy.spawnCheck()
     if love.timer.getTime() - enemy.spawnTimer >= 3 then
-            print("Spawning enemy!")
+            -- print("Spawning enemy!")
             enemy.spawnTimer = love.timer.getTime()
            
             for i = 1, math.random(1, 1 + math.min(((points.currentPoints)/50)*1, 2)) do
@@ -137,6 +130,6 @@ function enemy.getPoints(word)
             points = points + 10 
         end
     end
-    print ("Points for ", word, " are ", points)
+    -- print ("Points for ", word, " are ", points)
     return points
 end

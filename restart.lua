@@ -1,12 +1,12 @@
 restart = {}
 
 function restart.load()
-	restart.wordCorrectSoFar = " "
+	restart.wordCorrectSoFar = "r"
 	restart.red = 234
 	restart.green = 234
 	restart.blue = 234
 	restart.height = 20
-	restart.wordRemaining = "restart"
+	restart.wordRemaining = "estart"
 	restart.word = "restart"
 	restart.x = 0
 	restart.y = love.graphics.getHeight()/2
