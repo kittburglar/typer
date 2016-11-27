@@ -8,6 +8,7 @@ require "bomb"
 
 
 main = {}
+music = love.audio.newSource("signed.mp3")
 
 function love.draw()
     enemy.draw()
@@ -34,6 +35,9 @@ function love.load()
 	points.load()
 	bomb.load()
 	explosion.load()
+	
+	music:rewind()
+	music:play()
 end
 
 function love.update(dt)

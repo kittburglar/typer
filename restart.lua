@@ -37,5 +37,6 @@ function restart.keypressed(key)
 
     if restart.wordRemaining == "" then
         love.load()
+        music:rewind()
     end
 end
