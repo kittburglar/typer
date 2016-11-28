@@ -1,10 +1,11 @@
-
+require "sick"
 require "restart"
 require "enemy"
 require "player"
 require "health"
 require "points"
 require "bomb"
+
 
 
 main = {}
@@ -32,7 +33,17 @@ function love.draw()
     bomb.draw()
     if main.gameover then
     	restart.draw()
+    else
+    	enemy.draw()
+	    player.draw()
+	    health.draw()
+	   
+	    explosion.draw()
+	    points.draw()
+	    bomb.draw()
 	end
+    
+    
 
 end
 
@@ -48,7 +59,6 @@ function love.load()
 
 
 	main.gameover = false;
-	
 	enemy.load()
 	math.randomseed(os.time())
 	restart.load()
@@ -57,10 +67,10 @@ function love.load()
 	points.load()
 	bomb.load()
 	explosion.load()
-	
 	music:setVolume(0.5)
 	music:play()
 	timer = 0
+	highscore.set("highscores", 10, "test", 0)
 end
 
 function love.update(dt)
@@ -68,12 +78,10 @@ function love.update(dt)
 	backgroundImage = background[1 + math.floor(timer) % 8]
 	print("timer is: ", timer)
 	if not main.gameover then
-		
 		enemy.spawnCheck()
 		enemy.update(dt)
 		player.update(dt)
-		health.update(dt)
-		
+		health.update(dt)	
 	end
 	explosion.update(dt)
 end

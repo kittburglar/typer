@@ -1,5 +1,6 @@
 require "player"
 require "explosion"
+require "points"
 
 health = {}
 health.wasUpdated = NO
@@ -20,7 +21,7 @@ function health.draw()
 end
 
 function health.load()
-	health.lifepoints = 3
+	health.lifepoints = 1
 	health.width = 30
 	health.height = 30
 	health.x = love.graphics.getWidth() - (health.lifepoints * health.width) - (lifepointspacing * health.lifepoints)
@@ -35,6 +36,9 @@ end
 
 function health.update(dt)
 	if health.lifepoints <= 0 then
+		print("Current points are: ", points.currentPoints)
+		highscore.add("testies", points.currentPoints)
+		highscore.save()
 	    main.gameover = true
 	    explosion.spawn(player.x + player.width/2, player.y + player.height/2, 255, 255, 255)
 	    player.width = 0
