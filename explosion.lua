@@ -7,9 +7,6 @@ function explosion.load()
 end
 
 function explosion.spawn(x, y, red, green, blue, segments)
-	-- coin:setVolume(0.1)
- --    coin:setPitch(math.random(1,10)/10)
- --    coin:play()
 	table.insert(explosion, {
 	        x = x,
 	        y = y,
@@ -33,6 +30,7 @@ end
 function explosion.draw()
 	for i,explo in ipairs(explosion) do
 		love.graphics.setColor(explo.red,explo.green, explo.blue)
+		love.graphics.setLineWidth(10)
         love.graphics.circle("line", explo.x, explo.y, explo.radius, explo.segments)
     end
 end
