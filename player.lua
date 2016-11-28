@@ -9,8 +9,8 @@ function player.draw()
 end
 
 function player.load()
-	player.width = 20
-	player.height = 20
+	player.width = 25
+	player.height = 25
 	player.x = love.graphics.getWidth()/2 - player.width/2
 	player.y = love.graphics.getHeight()/2 - player.height/2
 	player.red = 234
