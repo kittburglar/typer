@@ -76,9 +76,6 @@ function enemy.keypressed(key)
         if e.wordRemaining == "" then
             explosion.spawn(e.x + e.width/2, e.y + e.height/2, e.red, e.green, e.blue)
             points.changed(points.currentPoints + e.points)
-            coin:setVolume(0.3)
-            coin:setPitch(math.random(4,6)/10)
-            coin:play()
             table.remove(enemy, i)
             enemy.resetAll()
         end
