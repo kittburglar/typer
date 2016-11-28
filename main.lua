@@ -10,12 +10,13 @@ require "bomb"
 main = {}
 music = love.audio.newSource("signed.mp3")
 
-explosionsound = love.audio.newSource("explosion.wav", "static")
-coin = love.audio.newSource("coin.wav", "static")
-
 function love.draw()
-	font = love.graphics.newFont("Paskowy.ttf", 15)
-	love.graphics.setFont(font)
+	for i = 0, love.graphics.getWidth() / background:getWidth() do
+        for j = 0, love.graphics.getHeight() / background:getHeight() do
+            love.graphics.draw(background, i * background:getWidth(), j * background:getHeight())
+        end
+    end
+
     enemy.draw()
     player.draw()
     health.draw()
@@ -30,6 +31,8 @@ function love.draw()
 end
 
 function love.load()
+	background = love.graphics.newImage("background.png")
+
 	main.gameover = false;
 	
 	enemy.load()
