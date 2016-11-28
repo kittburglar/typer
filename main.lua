@@ -8,12 +8,18 @@ require "bomb"
 
 
 main = {}
+local background = {}
 music = love.audio.newSource("signed.mp3")
+local timer
 
 function love.draw()
-	for i = 0, love.graphics.getWidth() / background:getWidth() do
-        for j = 0, love.graphics.getHeight() / background:getHeight() do
-            love.graphics.draw(background, i * background:getWidth(), j * background:getHeight())
+	-- background = love.graphics.newImage("background.png")
+	
+	print("Background image :", backgroundImage)
+	for i = 0, love.graphics.getWidth() / backgroundImage:getWidth() do
+        for j = 0, love.graphics.getHeight() / backgroundImage:getHeight() do
+            love.graphics.draw(backgroundImage, i * backgroundImage:getWidth(), j * backgroundImage:getHeight())
+            print("Drawing")
         end
     end
 
@@ -31,7 +37,15 @@ function love.draw()
 end
 
 function love.load()
-	background = love.graphics.newImage("background.png")
+	table.insert(background, love.graphics.newImage("background.png"))
+	table.insert(background, love.graphics.newImage("background2.png"))
+	table.insert(background, love.graphics.newImage("background3.png"))
+	table.insert(background, love.graphics.newImage("background4.png"))
+	table.insert(background, love.graphics.newImage("background5.png"))
+	table.insert(background, love.graphics.newImage("background6.png"))
+	table.insert(background, love.graphics.newImage("background7.png"))
+	table.insert(background, love.graphics.newImage("background8.png"))
+
 
 	main.gameover = false;
 	
@@ -46,9 +60,13 @@ function love.load()
 	
 	music:setVolume(0.5)
 	music:play()
+	timer = 0
 end
 
 function love.update(dt)
+	timer = timer + dt * 7
+	backgroundImage = background[1 + math.floor(timer) % 8]
+	print("timer is: ", timer)
 	if not main.gameover then
 		
 		enemy.spawnCheck()
