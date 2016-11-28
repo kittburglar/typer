@@ -5,7 +5,7 @@ function restart.load()
 	restart.red = 234
 	restart.green = 234
 	restart.blue = 234
-	restart.height = 20
+	restart.height = 50
 	restart.wordRemaining = "estart"
 	restart.word = "restart"
 	restart.x = 0
@@ -15,11 +15,11 @@ end
 
 function restart.draw()
 	w = love.graphics.getWidth()
-	love.graphics.setNewFont(100)
+	love.graphics.setNewFont("8-bit-wonder.ttf", 100)
 	love.graphics.setColor(234,234,234)
-	love.graphics.printf({{213,78,83}, restart.wordCorrectSoFar, {234,234,234}, restart.wordRemaining} , restart.x, restart.y + restart.height, w, "center")
-	love.graphics.setColor(213,78,83)
-	love.graphics.printf("GAME OVER", 0, love.graphics.getHeight()/2 - 100, w, "center")
+	love.graphics.printf({{234,234,234}, restart.wordCorrectSoFar, {213,78,83}, restart.wordRemaining} , restart.x, restart.y + restart.height, w, "center")
+	love.graphics.setColor(234,234,234)
+	love.graphics.printf("GAME OVER", 0, love.graphics.getHeight()/2 - 200, w, "center")
 end
 
 function restart.keypressed(key)

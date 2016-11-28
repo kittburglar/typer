@@ -14,6 +14,8 @@ explosionsound = love.audio.newSource("explosion.wav", "static")
 coin = love.audio.newSource("coin.wav", "static")
 
 function love.draw()
+	font = love.graphics.newFont("Paskowy.ttf", 15)
+	love.graphics.setFont(font)
     enemy.draw()
     player.draw()
     health.draw()
