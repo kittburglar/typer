@@ -42,6 +42,8 @@ function love.draw()
 end
 
 function love.load()
+	love.keyboard.setTextInput(true)
+
 	table.insert(background, love.graphics.newImage("background.png"))
 	table.insert(background, love.graphics.newImage("background2.png"))
 	table.insert(background, love.graphics.newImage("background3.png"))
