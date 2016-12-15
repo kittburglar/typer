@@ -41,7 +41,7 @@ function love.draw()
 end
 
 function love.load()
-	
+	love.window.setMode(414, 736)
 
 	table.insert(background, love.graphics.newImage("background.png"))
 	table.insert(background, love.graphics.newImage("background2.png"))

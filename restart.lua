@@ -11,7 +11,7 @@ function restart.load()
 	restart.wordRemaining = "estart"
 	restart.word = "restart"
 	restart.x = 0
-	restart.y = love.graphics.getHeight()/2
+	restart.y = (love.graphics.getHeight() - 216)/2
 
 end
 

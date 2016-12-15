@@ -11,8 +11,9 @@ end
 function player.load()
 	player.width = 25
 	player.height = 25
-	player.x = love.graphics.getWidth()/2 - player.width/2
-	player.y = love.graphics.getHeight()/2 - player.height/2
+	print(love.graphics.getWidth())
+	player.x = love.graphics.getWidth()/2 - player.width/2 
+	player.y = love.graphics.getHeight()/2 - player.height/2 - 216 /2
 	player.red = 234
 	player.green = 234
 	player.blue = 234
