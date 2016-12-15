@@ -21,7 +21,6 @@ function love.draw()
 	for i = 0, love.graphics.getWidth() / backgroundImage:getWidth() do
         for j = 0, love.graphics.getHeight() / backgroundImage:getHeight() do
             love.graphics.draw(backgroundImage, i * backgroundImage:getWidth(), j * backgroundImage:getHeight())
-            print("Drawing")
         end
     end
     
@@ -42,7 +41,7 @@ function love.draw()
 end
 
 function love.load()
-	love.keyboard.setTextInput(true)
+	
 
 	table.insert(background, love.graphics.newImage("background.png"))
 	table.insert(background, love.graphics.newImage("background2.png"))
@@ -70,9 +69,9 @@ function love.load()
 end
 
 function love.update(dt)
+	love.keyboard.setTextInput(true)
 	timer = timer + dt * 7
 	backgroundImage = background[1 + math.floor(timer) % 8]
-	print("timer is: ", timer)
 	if not main.gameover then
 		enemy.spawnCheck()
 		enemy.update(dt)
