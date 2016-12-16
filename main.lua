@@ -70,7 +70,7 @@ function love.load()
 	music:setVolume(0.5)
 	music:play()
 	timer = 0
-	highscore.set("highscores", 10, "test", 0)
+	highscore.set("highscore", 1, "Best", 0)
 end
 
 function love.update(dt)

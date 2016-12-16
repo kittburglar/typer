@@ -25,7 +25,7 @@ function enemy.create(x, y, width, height, red, green, blue, word)
         red = red,
         green = green,
         blue = blue,
-        speed = 100 + ((points.currentPoints)/100) * .05,
+        speed = 1 + ((points.currentPoints)/100) * .05,
         deathAnimationTimer = 0,
         deathStartTime = 0,
         points = enemy.getPoints(word)
