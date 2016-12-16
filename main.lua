@@ -17,27 +17,21 @@ function love.draw()
 	-- background = love.graphics.newImage("background.png")
 	
 	print("Background image :", backgroundImage)
+	love.graphics.setColor(255, 255, 255)
 	for i = 0, love.graphics.getWidth() / backgroundImage:getWidth() do
         for j = 0, love.graphics.getHeight() / backgroundImage:getHeight() do
             love.graphics.draw(backgroundImage, i * backgroundImage:getWidth(), j * backgroundImage:getHeight())
             print("Drawing")
         end
     end
-
-    enemy.draw()
-    player.draw()
-    health.draw()
-   
-    explosion.draw()
-    points.draw()
-    bomb.draw()
+    
     if main.gameover then
     	restart.draw()
     else
     	enemy.draw()
 	    player.draw()
 	    health.draw()
-	   
+	   	points.draw()
 	    explosion.draw()
 	    points.draw()
 	    bomb.draw()

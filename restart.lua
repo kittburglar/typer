@@ -20,11 +20,11 @@ function restart.draw()
 	love.graphics.printf({{213,78,83}, restart.wordCorrectSoFar, {234,234,234}, restart.wordRemaining} , restart.x, restart.y + restart.height, w, "center")
 	love.graphics.setColor(213,78,83)
 	love.graphics.printf("GAME OVER", 0, love.graphics.getHeight()/2 - 100, w, "center")
-	love.graphics.setNewFont(40)
+	
 	for i, score, name in highscore() do
-	    love.graphics.print(name, 400, i * 40)
-	    love.graphics.print(score, 500, i * 40)
+	    love.graphics.printf({{213,78,83}, name, {234,234,234}, score} , restart.x, restart.y + restart.height + 100, w, "center")
 	end
+	love.graphics.setNewFont(40)
 end
 
 function restart.keypressed(key)
