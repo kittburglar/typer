@@ -9,8 +9,8 @@ function player.draw()
 end
 
 function player.load()
-	player.width = 25
-	player.height = 25
+	player.width = 25 * (love.graphics.getWidth() / 600)
+	player.height = 25 * (love.graphics.getWidth() / 600)
 	print(love.graphics.getWidth())
 	player.x = love.graphics.getWidth()/2 - player.width/2 
 	player.y = love.graphics.getHeight()/2 - player.height/2 - 216 /2

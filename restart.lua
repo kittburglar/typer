@@ -17,10 +17,10 @@ end
 
 function restart.draw()
 	w = love.graphics.getWidth()
-	padding = 100
+	padding = love.graphics.getHeight() / 16
 	h = love.graphics.getHeight() - 216 - (2 * padding)
 	offset = 20
-	love.graphics.setNewFont("8-bit-wonder.ttf", 40)
+	love.graphics.setNewFont("8-bit-wonder.ttf", love.graphics.getWidth()/10)
 	love.graphics.setColor(234,234,234)
 	love.graphics.printf({{213,78,83}, restart.wordCorrectSoFar, {234,234,234}, restart.wordRemaining} , restart.x, (3*h)/4 + padding + offset, w, "center")
 	love.graphics.setColor(213,78,83)

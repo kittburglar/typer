@@ -15,6 +15,7 @@ local timer
 
 function love.draw()
 	love.graphics.setColor(255, 255, 255)
+
 	for i = 0, love.graphics.getWidth() / backgroundImage:getWidth() do
         for j = 0, love.graphics.getHeight() / backgroundImage:getHeight() do
             love.graphics.draw(backgroundImage, i * backgroundImage:getWidth(), j * backgroundImage:getHeight())
@@ -38,7 +39,9 @@ function love.draw()
 end
 
 function love.load()
-	love.window.setMode(414, 736)
+
+	-- love.window.setMode(320, 480)
+	-- love.window.setMode(414, 736)
 
 	table.insert(background, love.graphics.newImage("background.png"))
 	table.insert(background, love.graphics.newImage("background2.png"))
