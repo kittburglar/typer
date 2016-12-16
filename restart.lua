@@ -17,18 +17,19 @@ end
 
 function restart.draw()
 	w = love.graphics.getWidth()
-	h = love.graphics.getHeight()
+	padding = 100
+	h = love.graphics.getHeight() - 216 - (2 * padding)
 	offset = 20
-	love.graphics.setNewFont("8-bit-wonder.ttf", 80)
+	love.graphics.setNewFont("8-bit-wonder.ttf", 40)
 	love.graphics.setColor(234,234,234)
-	love.graphics.printf({{213,78,83}, restart.wordCorrectSoFar, {234,234,234}, restart.wordRemaining} , restart.x, (3*h)/4 + offset, w, "center")
+	love.graphics.printf({{213,78,83}, restart.wordCorrectSoFar, {234,234,234}, restart.wordRemaining} , restart.x, (3*h)/4 + padding + offset, w, "center")
 	love.graphics.setColor(213,78,83)
-	love.graphics.printf("GAME OVER", 0, 0 + offset, w, "center")
+	love.graphics.printf("GAME OVER", 0, padding + offset, w, "center")
 	
 	for i, score, name in highscore() do
-	    love.graphics.printf({{213,78,83}, name, {234,234,234}, score} , restart.x, (1*h)/4 + offset, w, "center")
+	    love.graphics.printf({{213,78,83}, name, {213,78,83}, " ", {234,234,234}, score} , restart.x, (1*h)/4 + padding +offset, w, "center")
 	end
-	love.graphics.printf({{213,78,83}, "Score", {234,234,234}, points.currentPoints} , restart.x, (2*h)/4 + offset, w, "center")
+	love.graphics.printf({{213,78,83}, "Score ", {234,234,234}, points.currentPoints} , restart.x, (2*h)/4 + padding + offset, w, "center")
 
 	love.graphics.setNewFont(40)
 end

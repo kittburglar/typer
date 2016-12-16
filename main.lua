@@ -14,9 +14,6 @@ music = love.audio.newSource("signed.mp3")
 local timer
 
 function love.draw()
-	-- background = love.graphics.newImage("background.png")
-	
-	print("Background image :", backgroundImage)
 	love.graphics.setColor(255, 255, 255)
 	for i = 0, love.graphics.getWidth() / backgroundImage:getWidth() do
         for j = 0, love.graphics.getHeight() / backgroundImage:getHeight() do
