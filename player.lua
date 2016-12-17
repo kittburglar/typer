@@ -26,6 +26,7 @@ end
 function player.checkCollision()
 	for i,e in ipairs(enemy) do
         if (helper.collisionDetection(e, player)) then
+        	enemy.remove(i)
         	if health.wasUpdated == NO then
         		explosion.spawn(e.x, e.y, e.red, e.green, e.blue)
         		explosion.spawn(player.x, player.y, player.red, player.green, player.blue)

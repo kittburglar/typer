@@ -28,9 +28,9 @@ function explosion.update(dt)
 end
 
 function explosion.draw()
+	love.graphics.setLineWidth(10)
 	for i,explo in ipairs(explosion) do
 		love.graphics.setColor(explo.red,explo.green, explo.blue)
-		love.graphics.setLineWidth(10)
         love.graphics.circle("line", explo.x, explo.y, explo.radius, explo.segments)
     end
 end
