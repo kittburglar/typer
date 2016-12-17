@@ -44,12 +44,13 @@ function enemy.update(dt)
 end
 
 function enemy.draw()
-    love.graphics.setColor(255, 255, 255)
     love.graphics.setNewFont(20)
     love.graphics.setNewFont("8-bit-wonder.ttf", 20)
     for i,e in ipairs(enemy) do
         love.graphics.setColor(e.red, e.green, e.blue)
         love.graphics.rectangle("fill", e.x, e.y, e.width, e.height)
+        love.graphics.setColor(255, 255, 255)
+        
         love.graphics.print({{255, 255, 255}, string.upper(e.wordCorrectSoFar),  {e.red, e.green, e.blue}, string.upper(e.wordRemaining)} , e.x - 10 - (string.len(e.word)*20)/2 + e.width/2, e.y + e.height + 4)
     end
 end
