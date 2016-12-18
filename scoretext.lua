@@ -30,7 +30,7 @@ function scoretext.update(dt)
 end
 
 function scoretext.draw()
-	love.graphics.setNewFont("8-bit-wonder.ttf", 20)
+	love.graphics.setNewFont("8-bit-wonder.ttf", 30)
 	for i,score in ipairs(scoretext) do
 		print((255/(love.timer.getTime() - score.startTime)))
 		love.graphics.setColor(score.red,score.green, score.blue, 255 - (255*(love.timer.getTime() - score.startTime)))
