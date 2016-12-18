@@ -1,5 +1,6 @@
 require "helper"
 require "explosion"
+require "points"
 
 player = {}
 
@@ -31,6 +32,8 @@ function player.checkCollision()
         		explosion.spawn(e.x, e.y, e.red, e.green, e.blue)
         		explosion.spawn(player.x, player.y, player.red, player.green, player.blue)
         	 	health.change(health.lifepoints - 1)
+        	 	points.setMultiplier(1)
+        	 	points.multKillCount = 0
         	end
         end
     end

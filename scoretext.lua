@@ -1,3 +1,5 @@
+require "points"
+
 scoretext = {}
 
 local maxShowTime = 1
@@ -8,7 +10,7 @@ function scoretext.load()
     end
 end
 
-function scoretext.spawn(x, y, red, green, blue, points)
+function scoretext.spawn(x, y, red, green, blue, point)
 	table.insert(scoretext, {
 	        x = x-10,
 	        y = y-10,
@@ -16,7 +18,7 @@ function scoretext.spawn(x, y, red, green, blue, points)
 	        red = red,
 	        green = green,
 	        blue = blue,
-	        points = points,
+	        point = point * points.multiplier,
 	        startTime = love.timer.getTime()
 	})
 end
@@ -32,9 +34,8 @@ end
 function scoretext.draw()
 	love.graphics.setNewFont("8-bit-wonder.ttf", 30)
 	for i,score in ipairs(scoretext) do
-		print((255/(love.timer.getTime() - score.startTime)))
 		love.graphics.setColor(score.red,score.green, score.blue, 255 - (255*(love.timer.getTime() - score.startTime)))
-        love.graphics.print(tostring(score.points), score.x - (love.timer.getTime() - score.startTime), score.y - (love.timer.getTime() - score.startTime), 0, 0.75 + (love.timer.getTime() - score.startTime) * .25, 0.75 + (love.timer.getTime() - score.startTime) * .25)
+        love.graphics.print(tostring(score.point), score.x - (love.timer.getTime() - score.startTime), score.y - (love.timer.getTime() - score.startTime), 0, 0.75 + (love.timer.getTime() - score.startTime) * .25, 0.75 + (love.timer.getTime() - score.startTime) * .25)
     	love.graphics.setColor(score.red,score.green, score.blue)
     end
 end

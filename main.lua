@@ -4,7 +4,7 @@ require "enemy"
 require "player"
 require "health"
 require "points"
-require "scoretext"
+require "texts"
 require "bomb"
 
 
@@ -31,7 +31,7 @@ function love.draw()
 	    health.draw()
 	   	points.draw()
 	    explosion.draw()
-	    scoretext.draw()
+	    texts.draw()
 	    points.draw()
 	    bomb.draw()
 	end
@@ -64,7 +64,7 @@ function love.load()
 	points.load()
 	bomb.load()
 	explosion.load()
-	scoretext.load()
+	texts.load()
 	music:setVolume(0.5)
 	music:play()
 	timer = 0
@@ -82,7 +82,7 @@ function love.update(dt)
 		health.update(dt)	
 	end
 	explosion.update(dt)
-	scoretext.update(dt)
+	texts.update(dt)
 end
 
 function love.keypressed( key )

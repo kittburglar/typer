@@ -2,7 +2,7 @@ require "player"
 require "explosion"
 require "words"
 require "points"
-require "scoretext"
+require "texts"
 
 enemy = {}
 enemyColors = {{213,78,83},{231,140,69},{231,197,71},{185,202,74},{112,192,177},{122,166,218}, {195,151,216}}
@@ -77,8 +77,14 @@ function enemy.keypressed(key)
 
         if e.wordRemaining == "" then
             explosion.spawn(e.x + e.width/2, e.y + e.height/2, e.red, e.green, e.blue)
-            scoretext.spawn(e.x + e.width/2, e.y + e.height/2, e.red, e.green, e.blue, e.points)
-            points.changed(points.currentPoints + e.points)
+            texts.spawn(e.x + e.width, e.y + e.height, e.red, e.green, e.blue, tostring(e.points * points.multiplier))
+            points.multKillCount = points.multKillCount + 1
+            points.changed(e.points)
+            if points.multKillCount > points.multiplierKillNeeded then
+                points.setMultiplier(points.multiplier + 1)
+                points.multKillCount = 0
+                texts.spawn(e.x + e.width, e.y, e.red, e.green, e.blue, string.format("multiplier x%s", points.multiplier))
+            end
             table.remove(enemy, i)
             enemy.resetAll()
         end
