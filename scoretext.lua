@@ -10,8 +10,8 @@ end
 
 function scoretext.spawn(x, y, red, green, blue, points)
 	table.insert(scoretext, {
-	        x = x,
-	        y = y,
+	        x = x-10,
+	        y = y-10,
 	        radius = 0, 
 	        red = red,
 	        green = green,

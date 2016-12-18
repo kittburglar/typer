@@ -70,9 +70,9 @@ function enemy.keypressed(key)
             local restOfEnemyWord = e.wordRemaining:sub(2, string.len(e.wordRemaining))
             e.wordCorrectSoFar = e.wordCorrectSoFar .. key
             e.wordRemaining = restOfEnemyWord
-        else 
-            e.wordCorrectSoFar = " "
-            e.wordRemaining = e.word
+        else --Mistyped enemy word
+            -- e.wordCorrectSoFar = " "
+            -- e.wordRemaining = e.word
         end
 
         if e.wordRemaining == "" then
