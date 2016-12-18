@@ -2,6 +2,7 @@ require "player"
 require "explosion"
 require "words"
 require "points"
+require "scoretext"
 
 enemy = {}
 enemyColors = {{213,78,83},{231,140,69},{231,197,71},{185,202,74},{112,192,177},{122,166,218}, {195,151,216}}
@@ -76,6 +77,7 @@ function enemy.keypressed(key)
 
         if e.wordRemaining == "" then
             explosion.spawn(e.x + e.width/2, e.y + e.height/2, e.red, e.green, e.blue)
+            scoretext.spawn(e.x + e.width/2, e.y + e.height/2, e.red, e.green, e.blue, e.points)
             points.changed(points.currentPoints + e.points)
             table.remove(enemy, i)
             enemy.resetAll()
