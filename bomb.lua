@@ -34,7 +34,9 @@ end
 
 function bomb.change(newbomb)
 	bomb.wasUpdated = YES
-	bomb.bombpoints = newbomb
+	if newbomb <= 3 then
+	    bomb.bombpoints = newbomb
+	end
 	bomb.wasUpdated = NO
 end
 

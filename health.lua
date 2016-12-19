@@ -33,7 +33,9 @@ end
 
 function health.change(newHealth)
 	health.wasUpdated = YES
-	health.lifepoints = newHealth
+	if newHealth <= 3 then
+	    health.lifepoints = newHealth
+	end
 	health.wasUpdated = NO
 end
 
