@@ -31,7 +31,14 @@ function player.checkCollision()
         	if health.wasUpdated == NO then
         		explosion.spawn(e.x, e.y, e.red, e.green, e.blue)
         		explosion.spawn(player.x, player.y, player.red, player.green, player.blue)
-        	 	health.change(health.lifepoints - 1)
+        		if e.word == "heal" then
+                	health.change(health.lifepoints + 1)
+            	elseif e.word == "bomb" then
+                	bomb.change(bomb.bombpoints + 1)
+            	else
+        			health.change(health.lifepoints - 1)
+        		end
+        	 	
         	 	points.setMultiplier(1)
         	 	points.multKillCount = 0
         	end
