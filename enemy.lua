@@ -106,8 +106,10 @@ function enemy.keypressed(key)
 
             if e.word == "heal" then
                 health.change(health.lifepoints + 1)
+                texts.spawn(e.x + e.width, e.y - 20, health.red, health.green, health.blue, "health up")
             elseif e.word == "bomb" then
                 bomb.change(bomb.bombpoints + 1)
+                texts.spawn(e.x + e.width, e.y - 20, bomb.red, bomb.green, bomb.blue, "bomb up")
             end
             table.remove(enemy, i)
         end
@@ -124,33 +126,33 @@ function enemy.randomCreate()
     local randomColor = enemyColors[math.random(1, 7)]
     if directionSpawn == 0 then
         if spawnType == 0 then
-            enemy.create(-50, math.random(0, love.graphics.getWidth()), 20, 20, randomColor[1], randomColor[2], randomColor[3], "heal") 
+            enemy.create(-50, math.random(0, love.graphics.getWidth()), 20, 20, health.red, health.green, health.blue, "heal") 
         elseif spawnType == 1 then
-            enemy.create(-50, math.random(0, love.graphics.getWidth()), 20, 20, randomColor[1], randomColor[2], randomColor[3], "bomb") 
+            enemy.create(-50, math.random(0, love.graphics.getWidth()), 20, 20, bomb.red, bomb.green, bomb.blue, "bomb") 
         else
             enemy.create(-50, math.random(0, love.graphics.getWidth()), 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord()) 
         end
     elseif directionSpawn == 1 then
         if spawnType == 0 then
-            enemy.create(math.random(0, love.graphics.getWidth()), -50, 20, 20, randomColor[1], randomColor[2], randomColor[3], "heal")
+            enemy.create(math.random(0, love.graphics.getWidth()), -50, 20, 20, health.red, health.green, health.blue, "heal")
         elseif spawnType == 1 then
-            enemy.create(math.random(0, love.graphics.getWidth()), -50, 20, 20, randomColor[1], randomColor[2], randomColor[3], "bomb")
+            enemy.create(math.random(0, love.graphics.getWidth()), -50, 20, 20, bomb.red, bomb.green, bomb.blue, "bomb")
         else
             enemy.create(math.random(0, love.graphics.getWidth()), -50, 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord())
         end
     elseif directionSpawn == 2 then
         if spawnType == 0 then
-            enemy.create(love.graphics.getWidth(), math.random(0, love.graphics.getHeight()), 20, 20, randomColor[1], randomColor[2], randomColor[3], "heal")
+            enemy.create(love.graphics.getWidth(), math.random(0, love.graphics.getHeight()), 20, 20, health.red, health.green, health.blue, "heal")
         elseif spawnType == 1 then
-            enemy.create(love.graphics.getWidth(), math.random(0, love.graphics.getHeight()), 20, 20, randomColor[1], randomColor[2], randomColor[3], "bomb")
+            enemy.create(love.graphics.getWidth(), math.random(0, love.graphics.getHeight()), 20, 20, bomb.red, bomb.green, bomb.blue, "bomb")
         else
             enemy.create(love.graphics.getWidth(), math.random(0, love.graphics.getHeight()), 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord())
         end
     elseif directionSpawn == 3 then
         if spawnType == 0 then
-            enemy.create(math.random(0, love.graphics.getWidth()), love.graphics.getHeight(), 20, 20, randomColor[1], randomColor[2], randomColor[3], "heal")
+            enemy.create(math.random(0, love.graphics.getWidth()), love.graphics.getHeight(), 20, 20, health.red, health.green, health.blue, "heal")
         elseif spawnType == 1 then
-            enemy.create(math.random(0, love.graphics.getWidth()), love.graphics.getHeight(), 20, 20, randomColor[1], randomColor[2], randomColor[3], "bomb")
+            enemy.create(math.random(0, love.graphics.getWidth()), love.graphics.getHeight(), 20, 20, bomb.red, bomb.green, bomb.blue, "bomb")
         else
             enemy.create(math.random(0, love.graphics.getWidth()), love.graphics.getHeight(), 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord())
         end
