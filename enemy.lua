@@ -48,11 +48,31 @@ function enemy.draw()
     love.graphics.setNewFont(20)
     love.graphics.setNewFont("8-bit-wonder.ttf", 20)
     for i,e in ipairs(enemy) do
-        love.graphics.setColor(e.red, e.green, e.blue)
-        love.graphics.rectangle("fill", e.x, e.y, e.width, e.height)
-        love.graphics.setColor(255, 255, 255)
+        if e.word == "heal" then
+            love.graphics.setColor(health.red, health.green, health.blue)
+            love.graphics.rectangle("fill", e.x, e.y, e.width, e.height)
+            love.graphics.setColor(255, 255, 255)
+            love.graphics.setLineWidth(4)
+            -- love.graphics.setColor(health.red, health.green, health.blue)
+            love.graphics.rectangle("line", e.x, e.y, e.width, e.height)
+            love.graphics.print({{255, 255, 255}, string.upper(e.wordCorrectSoFar),  {health.red, health.green, health.blue}, string.upper(e.wordRemaining)} , e.x - 10 - (string.len(e.word)*20)/2 + e.width/2, e.y + e.height + 4)
+        elseif e.word == "bomb" then
+            love.graphics.setColor(bomb.red, bomb.green, bomb.blue)
+            love.graphics.rectangle("fill", e.x, e.y, e.width, e.height)
+            love.graphics.setColor(255, 255, 255)
+            love.graphics.setLineWidth(4)
+            -- love.graphics.setColor(bomb.red, bomb.green, bomb.blue)
+            love.graphics.rectangle("line", e.x, e.y, e.width, e.height)
+            love.graphics.print({{255, 255, 255}, string.upper(e.wordCorrectSoFar),  {bomb.red, bomb.green, bomb.blue}, string.upper(e.wordRemaining)} , e.x - 10 - (string.len(e.word)*20)/2 + e.width/2, e.y + e.height + 4)
+        else
+            love.graphics.setColor(e.red, e.green, e.blue)
+            love.graphics.rectangle("fill", e.x, e.y, e.width, e.height)
+            love.graphics.setColor(255, 255, 255)
+            love.graphics.print({{255, 255, 255}, string.upper(e.wordCorrectSoFar),  {e.red, e.green, e.blue}, string.upper(e.wordRemaining)} , e.x - 10 - (string.len(e.word)*20)/2 + e.width/2, e.y + e.height + 4)
+        end
         
-        love.graphics.print({{255, 255, 255}, string.upper(e.wordCorrectSoFar),  {e.red, e.green, e.blue}, string.upper(e.wordRemaining)} , e.x - 10 - (string.len(e.word)*20)/2 + e.width/2, e.y + e.height + 4)
+        
+        
     end
 end
 
@@ -71,8 +91,6 @@ function enemy.keypressed(key)
             e.wordCorrectSoFar = e.wordCorrectSoFar .. key
             e.wordRemaining = restOfEnemyWord
         else --Mistyped enemy word
-            -- e.wordCorrectSoFar = " "
-            -- e.wordRemaining = e.word
         end
 
         if e.wordRemaining == "" then
@@ -85,8 +103,13 @@ function enemy.keypressed(key)
                 points.multKillCount = 0
                 texts.spawn(e.x + e.width, e.y, e.red, e.green, e.blue, string.format("multiplier x%s", points.multiplier))
             end
+
+            if e.word == "heal" then
+                health.change(health.lifepoints + 1)
+            elseif e.word == "bomb" then
+                bomb.change(bomb.bombpoints + 1)
+            end
             table.remove(enemy, i)
-            enemy.resetAll()
         end
     end
 end
@@ -96,17 +119,41 @@ function enemy.remove(i)
 end
 
 function enemy.randomCreate()
-
-    local randomSpawn = math.random(0, 3)
+    local spawnType = math.random(0, 3)
+    local directionSpawn = math.random(0, 3)
     local randomColor = enemyColors[math.random(1, 7)]
-    if randomSpawn == 0 then
-        enemy.create(-50, math.random(0, love.graphics.getWidth()), 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord()) 
-    elseif randomSpawn == 1 then
-        enemy.create(math.random(0, love.graphics.getWidth()), -50, 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord())
-    elseif randomSpawn == 2 then
-        enemy.create(love.graphics.getWidth(), math.random(0, love.graphics.getHeight()), 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord())
-    elseif randomSpawn == 3 then
-        enemy.create(math.random(0, love.graphics.getWidth()), love.graphics.getHeight(), 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord())
+    if directionSpawn == 0 then
+        if spawnType == 0 then
+            enemy.create(-50, math.random(0, love.graphics.getWidth()), 20, 20, randomColor[1], randomColor[2], randomColor[3], "heal") 
+        elseif spawnType == 1 then
+            enemy.create(-50, math.random(0, love.graphics.getWidth()), 20, 20, randomColor[1], randomColor[2], randomColor[3], "bomb") 
+        else
+            enemy.create(-50, math.random(0, love.graphics.getWidth()), 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord()) 
+        end
+    elseif directionSpawn == 1 then
+        if spawnType == 0 then
+            enemy.create(math.random(0, love.graphics.getWidth()), -50, 20, 20, randomColor[1], randomColor[2], randomColor[3], "heal")
+        elseif spawnType == 1 then
+            enemy.create(math.random(0, love.graphics.getWidth()), -50, 20, 20, randomColor[1], randomColor[2], randomColor[3], "bomb")
+        else
+            enemy.create(math.random(0, love.graphics.getWidth()), -50, 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord())
+        end
+    elseif directionSpawn == 2 then
+        if spawnType == 0 then
+            enemy.create(love.graphics.getWidth(), math.random(0, love.graphics.getHeight()), 20, 20, randomColor[1], randomColor[2], randomColor[3], "heal")
+        elseif spawnType == 1 then
+            enemy.create(love.graphics.getWidth(), math.random(0, love.graphics.getHeight()), 20, 20, randomColor[1], randomColor[2], randomColor[3], "bomb")
+        else
+            enemy.create(love.graphics.getWidth(), math.random(0, love.graphics.getHeight()), 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord())
+        end
+    elseif directionSpawn == 3 then
+        if spawnType == 0 then
+            enemy.create(math.random(0, love.graphics.getWidth()), love.graphics.getHeight(), 20, 20, randomColor[1], randomColor[2], randomColor[3], "heal")
+        elseif spawnType == 1 then
+            enemy.create(math.random(0, love.graphics.getWidth()), love.graphics.getHeight(), 20, 20, randomColor[1], randomColor[2], randomColor[3], "bomb")
+        else
+            enemy.create(math.random(0, love.graphics.getWidth()), love.graphics.getHeight(), 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord())
+        end
     end
 end
 

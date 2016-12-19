@@ -10,7 +10,7 @@ function health.draw()
 	local i = 0
 	while i < 3 do
 		if i < health.lifepoints then
-			love.graphics.setColor(213,78,83)
+			love.graphics.setColor(health.red, health.green, health.blue)
 			love.graphics.rectangle("fill", health.x + (health.width + lifepointspacing) * i, health.y, health.width, health.height)
 		end
 		love.graphics.setLineWidth(4)
@@ -26,6 +26,9 @@ function health.load()
 	health.height = 30
 	health.x = love.graphics.getWidth() - (health.lifepoints * health.width) - (lifepointspacing * health.lifepoints)
 	health.y = lifepointspacing
+	health.red = 213
+	health.green = 78
+	health.blue = 83
 end
 
 function health.change(newHealth)

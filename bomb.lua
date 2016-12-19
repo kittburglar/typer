@@ -10,7 +10,7 @@ function bomb.draw()
 	local i = 0
 	while i < 3 do
 		if i < bomb.bombpoints then
-			love.graphics.setColor(122,166,218)
+			love.graphics.setColor(bomb.red, bomb.green, bomb.blue)
 			love.graphics.rectangle("fill", bombpointspacing + (bomb.width + bombpointspacing) * i, bomb.y, bomb.width, bomb.height)
 		end
 		love.graphics.setLineWidth(4)
@@ -27,6 +27,9 @@ function bomb.load()
 	bomb.height = 30
 	bomb.x = love.graphics.getWidth() - (bomb.bombpoints * bomb.width) - (bombpointspacing * bomb.bombpoints)
 	bomb.y = bombpointspacing
+	bomb.red = 122
+	bomb.green = 166
+	bomb.blue = 218
 end
 
 function bomb.change(newbomb)

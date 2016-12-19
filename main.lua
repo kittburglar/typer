@@ -26,7 +26,7 @@ function love.draw()
     if main.gameover then
     	restart.draw()
     else
-    	enemy.draw()
+    	
 	    player.draw()
 	    health.draw()
 	   	points.draw()
@@ -34,6 +34,7 @@ function love.draw()
 	    texts.draw()
 	    points.draw()
 	    bomb.draw()
+	    enemy.draw()
 	end
     
     
