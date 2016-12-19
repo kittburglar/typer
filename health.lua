@@ -41,7 +41,6 @@ end
 
 function health.update(dt)
 	if health.lifepoints <= 0 then
-		print("Current points are: ", points.currentPoints)
 		highscore.add("Best", points.currentPoints)
 		highscore.save()
 	    main.gameover = true

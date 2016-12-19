@@ -53,7 +53,6 @@ function enemy.draw()
             love.graphics.rectangle("fill", e.x, e.y, e.width, e.height)
             love.graphics.setColor(255, 255, 255)
             love.graphics.setLineWidth(4)
-            -- love.graphics.setColor(health.red, health.green, health.blue)
             love.graphics.rectangle("line", e.x, e.y, e.width, e.height)
             love.graphics.print({{255, 255, 255}, string.upper(e.wordCorrectSoFar),  {health.red, health.green, health.blue}, string.upper(e.wordRemaining)} , e.x - 10 - (string.len(e.word)*20)/2 + e.width/2, e.y + e.height + 4)
         elseif e.word == "bomb" then

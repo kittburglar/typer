@@ -20,13 +20,11 @@ end
 function points.changed(newPoints)
 	if points.wasUpdated == NO then
 	    points.wasUpdated = YES
-	    print("Kill count is: ", points.multKillCount, " multiplier is: ", points.multiplier)
 		points.currentPoints = points.currentPoints + (newPoints * points.multiplier)
 		points.wasUpdated = NO
 	end
 end
 
 function points.setMultiplier(newMultiplier)
-	print("New multiplier is: ", newMultiplier)
 	points.multiplier = newMultiplier
 end

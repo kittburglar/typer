@@ -5,8 +5,13 @@ require "points"
 player = {}
 
 function player.draw()
-	love.graphics.setColor(player.red,player.green,player.blue)
+    love.graphics.setColor(player.red,player.green,player.blue)
     love.graphics.rectangle("fill", player.x, player.y, player.width, player.height)
+    love.graphics.setColor(129,162,190)
+    love.graphics.rectangle("fill", player.x + player.width/2 - 10/2, player.y + player.height/2 - 10/2, 10, 10)
+    love.graphics.setColor(197,200,198)
+    love.graphics.setLineWidth(4)
+    love.graphics.rectangle("line", player.x, player.y, player.width, player.height)
 end
 
 function player.load()
