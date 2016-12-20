@@ -73,6 +73,7 @@ function love.load()
 	explosion.load()
 	texts.load()
 	music:setVolume(0.5)
+	music:setLooping(true)
 	music:play()
 	timer = 0
 	highscore.set("highscore", 1, "Best", 0)
