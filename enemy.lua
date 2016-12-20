@@ -37,7 +37,6 @@ function enemy.update(dt)
     for i,e in ipairs(enemy) do
         -- Rotate us to face the player
         e.rotation = math.atan2(player.y - e.y, player.x - e.x);
-        print("rotation is", e.rotation)
         -- Move towards the player
         e.x = e.x + math.cos(e.rotation) * e.speed;
         e.y = e.y + math.sin(e.rotation) * e.speed;
@@ -51,23 +50,23 @@ function enemy.draw()
         if e.word == "heal" then
             love.graphics.setColor(health.red, health.green, health.blue)
             love.graphics.rectangle("fill", e.x, e.y, e.width, e.height)
-            love.graphics.setColor(255, 255, 255)
+            love.graphics.setColor(234,234,234)
             love.graphics.setLineWidth(4)
             love.graphics.rectangle("line", e.x, e.y, e.width, e.height)
-            love.graphics.print({{255, 255, 255}, string.upper(e.wordCorrectSoFar),  {health.red, health.green, health.blue}, string.upper(e.wordRemaining)} , e.x - 10 - (string.len(e.word)*20)/2 + e.width/2, e.y + e.height + 4)
+            love.graphics.print({{234,234,234}, string.upper(e.wordCorrectSoFar),  {health.red, health.green, health.blue}, string.upper(e.wordRemaining)} , e.x - 10 - (string.len(e.word)*20)/2 + e.width/2, e.y + e.height + 4)
         elseif e.word == "bomb" then
             love.graphics.setColor(bomb.red, bomb.green, bomb.blue)
             love.graphics.rectangle("fill", e.x, e.y, e.width, e.height)
-            love.graphics.setColor(255, 255, 255)
+            love.graphics.setColor(234,234,234)
             love.graphics.setLineWidth(4)
             -- love.graphics.setColor(bomb.red, bomb.green, bomb.blue)
             love.graphics.rectangle("line", e.x, e.y, e.width, e.height)
-            love.graphics.print({{255, 255, 255}, string.upper(e.wordCorrectSoFar),  {bomb.red, bomb.green, bomb.blue}, string.upper(e.wordRemaining)} , e.x - 10 - (string.len(e.word)*20)/2 + e.width/2, e.y + e.height + 4)
+            love.graphics.print({{234,234,234}, string.upper(e.wordCorrectSoFar),  {bomb.red, bomb.green, bomb.blue}, string.upper(e.wordRemaining)} , e.x - 10 - (string.len(e.word)*20)/2 + e.width/2, e.y + e.height + 4)
         else
             love.graphics.setColor(e.red, e.green, e.blue)
             love.graphics.rectangle("fill", e.x, e.y, e.width, e.height)
-            love.graphics.setColor(255, 255, 255)
-            love.graphics.print({{255, 255, 255}, string.upper(e.wordCorrectSoFar),  {e.red, e.green, e.blue}, string.upper(e.wordRemaining)} , e.x - 10 - (string.len(e.word)*20)/2 + e.width/2, e.y + e.height + 4)
+            love.graphics.setColor(234,234,234)
+            love.graphics.print({{234,234,234}, string.upper(e.wordCorrectSoFar),  {e.red, e.green, e.blue}, string.upper(e.wordRemaining)} , e.x - 10 - (string.len(e.word)*20)/2 + e.width/2, e.y + e.height + 4)
         end
         
         
@@ -94,7 +93,6 @@ function enemy.keypressed(key)
             explosion.spawn(e.x + e.width/2, e.y + e.height/2, 3, 3, e.red, e.green, e.blue, 2, 3, 10, 2)
 
             e.rotation = math.atan2(player.y - e.y, player.x - e.x);
-            print("rotation is", e.rotation)
             -- Move towards the player
             e.x = e.x - 20*math.cos(e.rotation) * e.speed;
             e.y = e.y - 20*math.sin(e.rotation) * e.speed;

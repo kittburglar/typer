@@ -16,17 +16,23 @@ local timer
 
 function love.draw()
 	love.graphics.setColor(255, 255, 255)
+	
 
 	for i = 0, love.graphics.getWidth() / backgroundImage:getWidth() do
         for j = 0, love.graphics.getHeight() / backgroundImage:getHeight() do
             love.graphics.draw(backgroundImage, i * backgroundImage:getWidth(), j * backgroundImage:getHeight())
         end
     end
+
+    -- Status bar on iOS
+    love.graphics.setColor(234,234,234)
+	love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), 20)
+	love.graphics.setColor(255, 255, 255)
     explosion.draw()
     if main.gameover then
     	restart.draw()
     else
-    	
+    	enemy.draw()
 	    player.draw()
 	    health.draw()
 	   	points.draw()
@@ -34,7 +40,7 @@ function love.draw()
 	    texts.draw()
 	    points.draw()
 	    bomb.draw()
-	    enemy.draw()
+	    
 	end
     
     

@@ -25,7 +25,7 @@ function health.load()
 	health.width = 30
 	health.height = 30
 	health.x = love.graphics.getWidth() - (health.lifepoints * health.width) - (lifepointspacing * health.lifepoints)
-	health.y = lifepointspacing
+	health.y = lifepointspacing + 20
 	health.red = 213
 	health.green = 78
 	health.blue = 83

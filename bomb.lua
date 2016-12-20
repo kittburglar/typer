@@ -26,7 +26,7 @@ function bomb.load()
 	bomb.width = 30
 	bomb.height = 30
 	bomb.x = love.graphics.getWidth() - (bomb.bombpoints * bomb.width) - (bombpointspacing * bomb.bombpoints)
-	bomb.y = bombpointspacing
+	bomb.y = bombpointspacing + 20
 	bomb.red = 122
 	bomb.green = 166
 	bomb.blue = 218
