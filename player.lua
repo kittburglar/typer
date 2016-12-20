@@ -12,6 +12,7 @@ function player.draw()
     love.graphics.setColor(197,200,198)
     love.graphics.setLineWidth(4)
     love.graphics.rectangle("line", player.x, player.y, player.width, player.height)
+
 end
 
 function player.load()
@@ -34,8 +35,9 @@ function player.checkCollision()
         if (helper.collisionDetection(e, player)) then
         	enemy.remove(i)
         	if health.wasUpdated == NO then
-        		explosion.spawn(e.x, e.y, e.red, e.green, e.blue)
-        		explosion.spawn(player.x, player.y, player.red, player.green, player.blue)
+        		explosion.spawn(e.x + e.width/2, e.y + e.height/2, 5, 5, e.red, e.green, e.blue, 2.00, 3.00, 100, 2)
+            	explosion.spawn(e.x + e.width/2, e.y + e.height/2, 7, 7, e.red, e.green, e.blue, 0, 1, 10, 2)
+        		explosion.spawn(player.x + player.width/2, player.y + player.height/2, 3, 3, player.red, player.green, player.blue, 2.00, 3.00, 10, 2)
         		if e.word == "heal" then
                 	health.change(health.lifepoints + 1)
             	elseif e.word == "bomb" then

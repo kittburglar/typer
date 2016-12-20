@@ -44,7 +44,8 @@ function health.update(dt)
 		highscore.add("Best", points.currentPoints)
 		highscore.save()
 	    main.gameover = true
-	    explosion.spawn(player.x + player.width/2, player.y + player.height/2, 255, 255, 255)
+	    explosion.spawn(player.x + player.width/2, player.y + player.height/2, 5, 5, player.red, player.green, player.blue, 2.00, 3.00, 100, 2)
+        explosion.spawn(player.x + player.width/2, player.y + player.height/2, 7, 7, player.red, player.green, player.blue, 0, 1, 10, 2)
 	    player.width = 0
 	    player.height = 0
 	end

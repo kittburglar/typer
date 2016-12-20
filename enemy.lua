@@ -131,7 +131,7 @@ function enemy.remove(i)
 end
 
 function enemy.randomCreate()
-    local spawnType = math.random(0, 3)
+    local spawnType = math.random(0, 10)
     local directionSpawn = math.random(0, 3)
     local randomColor = enemyColors[math.random(1, 7)]
     if directionSpawn == 0 then

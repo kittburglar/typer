@@ -22,7 +22,7 @@ function love.draw()
             love.graphics.draw(backgroundImage, i * backgroundImage:getWidth(), j * backgroundImage:getHeight())
         end
     end
-    
+    explosion.draw()
     if main.gameover then
     	restart.draw()
     else
@@ -30,7 +30,7 @@ function love.draw()
 	    player.draw()
 	    health.draw()
 	   	points.draw()
-	    explosion.draw()
+	    
 	    texts.draw()
 	    points.draw()
 	    bomb.draw()
