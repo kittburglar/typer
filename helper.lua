@@ -7,3 +7,7 @@ function helper.collisionDetection(object1, object2)
    							object1.height + object1.y > object2.y
     return isCollision
 end
+
+function helper.randomFloat(lower, greater)
+    return lower + math.random()  * (greater - lower);
+end
