@@ -37,7 +37,7 @@ function enemy.update(dt)
     for i,e in ipairs(enemy) do
         -- Rotate us to face the player
         e.rotation = math.atan2(player.y - e.y, player.x - e.x);
-
+        print("rotation is", e.rotation)
         -- Move towards the player
         e.x = e.x + math.cos(e.rotation) * e.speed;
         e.y = e.y + math.sin(e.rotation) * e.speed;
@@ -89,11 +89,22 @@ function enemy.keypressed(key)
             local restOfEnemyWord = e.wordRemaining:sub(2, string.len(e.wordRemaining))
             e.wordCorrectSoFar = e.wordCorrectSoFar .. key
             e.wordRemaining = restOfEnemyWord
+
+            --Hit Animation
+            explosion.spawn(e.x + e.width/2, e.y + e.height/2, 3, 3, e.red, e.green, e.blue, 2, 3, 10, 2)
+
+            e.rotation = math.atan2(player.y - e.y, player.x - e.x);
+            print("rotation is", e.rotation)
+            -- Move towards the player
+            e.x = e.x - 5*math.cos(e.rotation) * e.speed;
+            e.y = e.y - 5*math.sin(e.rotation) * e.speed;
         else --Mistyped enemy word
         end
 
         if e.wordRemaining == "" then
-            explosion.spawn(e.x + e.width/2, e.y + e.height/2, e.red, e.green, e.blue)
+            explosion.spawn(e.x + e.width/2, e.y + e.height/2, 5, 5, e.red, e.green, e.blue, 2.00, 3.00, 100, 2)
+            explosion.spawn(e.x + e.width/2, e.y + e.height/2, 7, 7, e.red, e.green, e.blue, 0, 1, 10, 2)
+
             texts.spawn(e.x + e.width, e.y + e.height, e.red, e.green, e.blue, tostring(e.points * points.multiplier))
             points.multKillCount = points.multKillCount + 1
             points.changed(e.points)
@@ -105,10 +116,10 @@ function enemy.keypressed(key)
 
             if e.word == "heal" then
                 health.change(health.lifepoints + 1)
-                texts.spawn(e.x + e.width, e.y - 20, health.red, health.green, health.blue, "health up")
+                texts.spawn(love.graphics.getWidth()/2, e.y - 20, health.red, health.green, health.blue, "health up")
             elseif e.word == "bomb" then
                 bomb.change(bomb.bombpoints + 1)
-                texts.spawn(e.x + e.width, e.y - 20, bomb.red, bomb.green, bomb.blue, "bomb up")
+                texts.spawn(love.graphics.getWidth()/2, e.y - 20, bomb.red, bomb.green, bomb.blue, "bomb up")
             end
             table.remove(enemy, i)
         end

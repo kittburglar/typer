@@ -13,7 +13,7 @@ function points.draw()
 	love.graphics.setColor(234,234,234)
 	love.graphics.setNewFont("8-bit-wonder.ttf", w/20)
 	love.graphics.printf(string.format("%s", points.currentPoints), 0, 20, w, "center")
-	love.graphics.setNewFont("8-bit-wonder.ttf", w/50)
+	love.graphics.setNewFont("8-bit-wonder.ttf", w/25)
 	love.graphics.printf(string.format("x%s", points.multiplier), 0, 60, w, "center")
 end
 
