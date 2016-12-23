@@ -94,8 +94,9 @@ function enemy.keypressed(key)
 
             e.rotation = math.atan2(player.y - e.y, player.x - e.x);
             -- Move towards the player
-            e.x = e.x - 20*math.cos(e.rotation) * e.speed;
-            e.y = e.y - 20*math.sin(e.rotation) * e.speed;
+            e.x = e.x - 10*math.cos(e.rotation) * e.speed;
+            e.y = e.y - 10*math.sin(e.rotation) * e.speed;
+            bullet.create(player.x, player.y, 5, 5, 255, 255, 255, 30, e)
         else --Mistyped enemy word
         end
 

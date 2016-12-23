@@ -5,6 +5,7 @@ require "player"
 require "health"
 require "points"
 require "texts"
+require "bullet"
 require "bomb"
 
 
@@ -33,10 +34,10 @@ function love.draw()
     	restart.draw()
     else
     	enemy.draw()
+    	bullet.draw()
 	    player.draw()
 	    health.draw()
 	   	points.draw()
-	    
 	    texts.draw()
 	    points.draw()
 	    bomb.draw()
@@ -88,6 +89,7 @@ function love.update(dt)
 		enemy.update(dt)
 		player.update(dt)
 		health.update(dt)	
+		bullet.update(dt)
 	end
 	explosion.update(dt)
 	texts.update(dt)
