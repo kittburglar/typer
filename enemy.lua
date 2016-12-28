@@ -6,6 +6,7 @@ require "texts"
 
 enemy = {}
 enemyColors = {{213,78,83},{231,140,69},{231,197,71},{185,202,74},{112,192,177},{122,166,218}, {195,151,216}}
+local lastColor = {}
 
 function enemy.load()
     for i,e in ipairs(enemy) do
@@ -26,7 +27,7 @@ function enemy.create(x, y, width, height, red, green, blue, word)
         red = red,
         green = green,
         blue = blue,
-        speed = 0.5 + ((points.currentPoints)/100) * .01,
+        speed = 0.6 + ((points.currentPoints)/100) * .05,
         deathAnimationTimer = 0,
         deathStartTime = 0,
         points = enemy.getPoints(word)
@@ -93,8 +94,8 @@ function enemy.keypressed(key)
         end
 
         if e.wordRemaining == "" then
-            explosion.spawn(e.x + e.width/2, e.y + e.height/2, 5, 5, e.red, e.green, e.blue, 2.00, 3.00, 100, 2)
-            explosion.spawn(e.x + e.width/2, e.y + e.height/2, 7, 7, e.red, e.green, e.blue, 0, 1, 10, 2)
+            explosion.spawn(e.x + e.width/2, e.y + e.height/2, 4, 4, e.red, e.green, e.blue, 2.00, 3.00, 200, 3)
+            explosion.spawn(e.x + e.width/2, e.y + e.height/2, 4, 4, e.red, e.green, e.blue, 0, 1, 200, 15)
 
             texts.spawn(e.x + e.width, e.y + e.height, e.red, e.green, e.blue, tostring(e.points * points.multiplier), 2)
             points.multKillCount = points.multKillCount + 1
@@ -124,14 +125,22 @@ end
 function enemy.randomCreate()
     local spawnType = math.random(0, 20)
     local directionSpawn = math.random(0, 3)
-    local randomColor = enemyColors[math.random(1, 7)]
+    local randomIndex = math.random(1, 7)
+    local randomColor = enemyColors[randomIndex]
+    if lastColor == randomColor then
+        print("new color!", randomIndex, (randomIndex)%7 + 1)
+        randomColor = enemyColors[(randomIndex)%7 + 1]
+    end
+    lastColor = randomColor
+    
+
     if directionSpawn == 0 then
         if spawnType == 0 then
-            enemy.create(-50, math.random(0, love.graphics.getWidth()), 20, 20, health.red, health.green, health.blue, "heal") 
+            enemy.create(-50, math.random(0, love.graphics.getHeight() - 216), 20, 20, health.red, health.green, health.blue, "heal") 
         elseif spawnType == 1 then
-            enemy.create(-50, math.random(0, love.graphics.getWidth()), 20, 20, bomb.red, bomb.green, bomb.blue, "bomb") 
+            enemy.create(-50, math.random(0, love.graphics.getHeight() - 216), 20, 20, bomb.red, bomb.green, bomb.blue, "bomb") 
         else
-            enemy.create(-50, math.random(0, love.graphics.getWidth()), 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord()) 
+            enemy.create(-50, math.random(0, love.graphics.getHeight() - 216), 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord()) 
         end
     elseif directionSpawn == 1 then
         if spawnType == 0 then
@@ -143,19 +152,19 @@ function enemy.randomCreate()
         end
     elseif directionSpawn == 2 then
         if spawnType == 0 then
-            enemy.create(love.graphics.getWidth(), math.random(0, love.graphics.getHeight()), 20, 20, health.red, health.green, health.blue, "heal")
+            enemy.create(love.graphics.getWidth(), math.random(0, love.graphics.getHeight() - 216), 20, 20, health.red, health.green, health.blue, "heal")
         elseif spawnType == 1 then
-            enemy.create(love.graphics.getWidth(), math.random(0, love.graphics.getHeight()), 20, 20, bomb.red, bomb.green, bomb.blue, "bomb")
+            enemy.create(love.graphics.getWidth(), math.random(0, love.graphics.getHeight() - 216), 20, 20, bomb.red, bomb.green, bomb.blue, "bomb")
         else
-            enemy.create(love.graphics.getWidth(), math.random(0, love.graphics.getHeight()), 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord())
+            enemy.create(love.graphics.getWidth(), math.random(0, love.graphics.getHeight() - 216), 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord())
         end
     elseif directionSpawn == 3 then
         if spawnType == 0 then
-            enemy.create(math.random(0, love.graphics.getWidth()), love.graphics.getHeight(), 20, 20, health.red, health.green, health.blue, "heal")
+            enemy.create(math.random(0, love.graphics.getWidth()), love.graphics.getHeight() - 216, 20, 20, health.red, health.green, health.blue, "heal")
         elseif spawnType == 1 then
-            enemy.create(math.random(0, love.graphics.getWidth()), love.graphics.getHeight(), 20, 20, bomb.red, bomb.green, bomb.blue, "bomb")
+            enemy.create(math.random(0, love.graphics.getWidth()), love.graphics.getHeight() - 216, 20, 20, bomb.red, bomb.green, bomb.blue, "bomb")
         else
-            enemy.create(math.random(0, love.graphics.getWidth()), love.graphics.getHeight(), 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord())
+            enemy.create(math.random(0, love.graphics.getWidth()), love.graphics.getHeight() - 216, 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord())
         end
     end
 end
@@ -164,7 +173,7 @@ function enemy.spawnCheck()
     if love.timer.getTime() - enemy.spawnTimer >= 5 then
             enemy.spawnTimer = love.timer.getTime()
            
-            for i = 1, math.random(1, 1 + math.min(((points.currentPoints)/50)*1, 2)) do
+            for i = 1, math.random(1, 1 + math.min(((points.currentPoints)/50)*1, 1)) do
                 enemy.randomCreate()
             end
         end
