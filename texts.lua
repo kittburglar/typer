@@ -35,8 +35,8 @@ end
 
 function texts.draw()
 	for i,text in ipairs(texts) do
-		love.graphics.setColor(text.red,text.green, text.blue, 255 - (255*(love.timer.getTime() - text.startTime)/text.duration))
-        love.graphics.print(text.word, text.x - font:getWidth(text.word)/4, text.y - font:getHeight(text.word)/2, 0, 0.75 + (love.timer.getTime() - text.startTime) * .25, 0.75 + (love.timer.getTime() - text.startTime) * .25)
+		love.graphics.setColor(text.red,text.green, text.blue, (255 + 255/2) - (255*(love.timer.getTime() - text.startTime)/text.duration*2))
+        love.graphics.print(text.word, text.x - font:getWidth(text.word)/4, text.y - font:getHeight(text.word)/2, 0)
     	love.graphics.setColor(text.red,text.green, text.blue)
     end
 end

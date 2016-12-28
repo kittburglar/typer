@@ -97,21 +97,21 @@ function enemy.keypressed(key)
             explosion.spawn(e.x + e.width/2, e.y + e.height/2, 4, 4, e.red, e.green, e.blue, 2.00, 3.00, 200, 3)
             explosion.spawn(e.x + e.width/2, e.y + e.height/2, 4, 4, e.red, e.green, e.blue, 0, 1, 200, 15)
 
-            texts.spawn(e.x + e.width, e.y + e.height, e.red, e.green, e.blue, tostring(e.points * points.multiplier), 2)
+            texts.spawn(e.x + e.width, e.y + e.height, 255, 255, 255, tostring(e.points * points.multiplier), 3)
             points.multKillCount = points.multKillCount + 1
             points.changed(e.points)
             if points.multKillCount > points.multiplierKillNeeded then
                 points.setMultiplier(points.multiplier + 1)
                 points.multKillCount = 0
-                texts.spawn(love.graphics.getWidth()/2, e.y, e.red, e.green, e.blue, string.format("multiplier x%s", points.multiplier),1)
+                texts.spawn(e.x + e.width, e.y, 255, 255, 255, string.format("x%s", points.multiplier),3)
             end
 
             if e.word == "heal" then
                 health.change(health.lifepoints + 1)
-                texts.spawn(love.graphics.getWidth()/2, e.y - 20, health.red, health.green, health.blue, "health up",1)
+                texts.spawn(e.x + e.width, e.y - 20, 255, 255, 255, "health up",3)
             elseif e.word == "bomb" then
                 bomb.change(bomb.bombpoints + 1)
-                texts.spawn(love.graphics.getWidth()/2, e.y - 20, bomb.red, bomb.green, bomb.blue, "bomb up",1)
+                texts.spawn(e.x + e.width, e.y - 20, 255, 255, 255, "bomb up",3)
             end
             table.remove(enemy, i)
         end

@@ -29,22 +29,23 @@ function love.draw()
     love.graphics.setColor(234,234,234)
 	love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), 20)
 	love.graphics.setColor(255, 255, 255)
-    explosion.draw()
+    
     if main.gameover then
     	restart.draw()
+    	explosion.draw()
     else
-    	enemy.draw()
     	bullet.draw()
+    	enemy.draw()
+    	
 	    player.draw()
-	    health.draw()
-	   	points.draw()
+    	explosion.draw()
+  
 	    texts.draw()
+	    health.draw()
 	    bomb.draw()
-	    
+	    points.draw()
 	end
     
-    
-
 end
 
 function love.load()
