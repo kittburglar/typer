@@ -26,7 +26,7 @@ function enemy.create(x, y, width, height, red, green, blue, word)
         red = red,
         green = green,
         blue = blue,
-        speed = 1 + ((points.currentPoints)/100) * .01,
+        speed = 0.5 + ((points.currentPoints)/100) * .01,
         deathAnimationTimer = 0,
         deathStartTime = 0,
         points = enemy.getPoints(word)
@@ -88,10 +88,6 @@ function enemy.keypressed(key)
             --Hit Animation
             explosion.spawn(e.x + e.width/2, e.y + e.height/2, 3, 3, e.red, e.green, e.blue, 2, 3, 10, 2)
 
-            e.rotation = math.atan2(player.y - e.y, player.x - e.x);
-            -- Move towards the player
-            e.x = e.x - 10*math.cos(e.rotation) * e.speed;
-            e.y = e.y - 10*math.sin(e.rotation) * e.speed;
             bullet.create(player.x, player.y, 5, 5, 112,192,177, 30, e)
         else --Mistyped enemy word
         end
