@@ -5,6 +5,7 @@ texts = {}
 local maxShowTime = 1
 
 function texts.load()
+	font = love.graphics.setNewFont("8-bit-wonder.ttf", 30)
 	for i,e in ipairs(texts) do
         texts[i] = nil
     end
@@ -33,7 +34,6 @@ function texts.update(dt)
 end
 
 function texts.draw()
-	font = love.graphics.setNewFont("8-bit-wonder.ttf", 30)
 	for i,text in ipairs(texts) do
 		love.graphics.setColor(text.red,text.green, text.blue, 255 - (255*(love.timer.getTime() - text.startTime)/text.duration))
         love.graphics.print(text.word, text.x - font:getWidth(text.word)/2, text.y - font:getHeight(text.word)/2, 0, 0.75 + (love.timer.getTime() - text.startTime) * .25, 0.75 + (love.timer.getTime() - text.startTime) * .25)

@@ -26,7 +26,7 @@ function enemy.create(x, y, width, height, red, green, blue, word)
         red = red,
         green = green,
         blue = blue,
-        speed = 1 + ((points.currentPoints)/100) * .05,
+        speed = 1 + ((points.currentPoints)/100) * .01,
         deathAnimationTimer = 0,
         deathStartTime = 0,
         points = enemy.getPoints(word)
@@ -44,22 +44,18 @@ function enemy.update(dt)
 end
 
 function enemy.draw()
-    love.graphics.setNewFont(20)
     love.graphics.setNewFont("8-bit-wonder.ttf", 20)
     for i,e in ipairs(enemy) do
         if e.word == "heal" then
             love.graphics.setColor(health.red, health.green, health.blue)
             love.graphics.rectangle("fill", e.x, e.y, e.width, e.height)
             love.graphics.setColor(234,234,234)
-            love.graphics.setLineWidth(4)
             love.graphics.rectangle("line", e.x, e.y, e.width, e.height)
             love.graphics.print({{234,234,234}, string.upper(e.wordCorrectSoFar),  {health.red, health.green, health.blue}, string.upper(e.wordRemaining)} , e.x - 10 - (string.len(e.word)*20)/2 + e.width/2, e.y + e.height + 4)
         elseif e.word == "bomb" then
             love.graphics.setColor(bomb.red, bomb.green, bomb.blue)
             love.graphics.rectangle("fill", e.x, e.y, e.width, e.height)
             love.graphics.setColor(234,234,234)
-            love.graphics.setLineWidth(4)
-            -- love.graphics.setColor(bomb.red, bomb.green, bomb.blue)
             love.graphics.rectangle("line", e.x, e.y, e.width, e.height)
             love.graphics.print({{234,234,234}, string.upper(e.wordCorrectSoFar),  {bomb.red, bomb.green, bomb.blue}, string.upper(e.wordRemaining)} , e.x - 10 - (string.len(e.word)*20)/2 + e.width/2, e.y + e.height + 4)
         else
@@ -96,7 +92,7 @@ function enemy.keypressed(key)
             -- Move towards the player
             e.x = e.x - 10*math.cos(e.rotation) * e.speed;
             e.y = e.y - 10*math.sin(e.rotation) * e.speed;
-            bullet.create(player.x, player.y, 5, 5, 255, 255, 255, 30, e)
+            bullet.create(player.x, player.y, 5, 5, 112,192,177, 30, e)
         else --Mistyped enemy word
         end
 
@@ -130,7 +126,7 @@ function enemy.remove(i)
 end
 
 function enemy.randomCreate()
-    local spawnType = math.random(0, 10)
+    local spawnType = math.random(0, 20)
     local directionSpawn = math.random(0, 3)
     local randomColor = enemyColors[math.random(1, 7)]
     if directionSpawn == 0 then
@@ -169,7 +165,7 @@ function enemy.randomCreate()
 end
 
 function enemy.spawnCheck()
-    if love.timer.getTime() - enemy.spawnTimer >= 3 then
+    if love.timer.getTime() - enemy.spawnTimer >= 5 then
             enemy.spawnTimer = love.timer.getTime()
            
             for i = 1, math.random(1, 1 + math.min(((points.currentPoints)/50)*1, 2)) do

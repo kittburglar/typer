@@ -9,7 +9,7 @@ function explosion.load()
     end
 end
 
-function explosion.spawn(x, y, width, height, red, green, blue, speedlow, speedhigh, maxBullets, bulletTime)
+function explosion.spawn(x, y, width, height, red, green, blue, speedlow, speedhigh, maxBullets, bulletTime, playerExplosion)
 	for i=1,maxBullets do
 		table.insert(explosion, {
 	        x = x,
@@ -23,7 +23,8 @@ function explosion.spawn(x, y, width, height, red, green, blue, speedlow, speedh
 	        speed = helper.randomFloat(speedlow, speedhigh),
 	        startTime = love.timer.getTime(),
 	        direction = helper.randomFloat(-3.14, 3.14),
-	        bulletTime = bulletTime
+	        bulletTime = bulletTime,
+	        playerExplosion = playerExplosion
 		})
 	end
 end
@@ -40,7 +41,11 @@ end
 
 function explosion.draw()
 	for i,explo in ipairs(explosion) do
-		love.graphics.setColor(explo.red,explo.green, explo.blue)
+		if explo.playerExplosion then
+		    love.graphics.setColor(math.random(0, 255), math.random(0, 255), math.random(0, 255))
+		else
+			love.graphics.setColor(explo.red, explo.green, explo.blue)
+		end
 		explo.width = explo.bulletSize - (explo.bulletSize/explo.bulletTime * (love.timer.getTime() - explo.startTime))
 		explo.height = explo.bulletSize - (explo.bulletSize/explo.bulletTime * (love.timer.getTime() - explo.startTime))
         love.graphics.rectangle("fill", explo.x, explo.y, explo.width , explo.height)

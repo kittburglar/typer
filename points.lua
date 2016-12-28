@@ -5,15 +5,16 @@ points.multiplierKillNeeded = 2
 function points.load()
 	points.currentPoints = 0
 	points.multiplier = 1
+	w = love.graphics.getWidth()
+	font = love.graphics.newFont("8-bit-wonder.ttf", w/20)
+	font2 = love.graphics.newFont("8-bit-wonder.ttf", w/25)
 end
 
 function points.draw()
-	w = love.graphics.getWidth()
-	love.graphics.setNewFont(30)
 	love.graphics.setColor(234,234,234)
-	love.graphics.setNewFont("8-bit-wonder.ttf", w/20)
+	love.graphics.setFont(font)
 	love.graphics.printf(string.format("%s", points.currentPoints), 0, 30, w, "center")
-	love.graphics.setNewFont("8-bit-wonder.ttf", w/25)
+	love.graphics.setFont(font2)
 	love.graphics.printf(string.format("x%s", points.multiplier), 0, 60, w, "center")
 end
 

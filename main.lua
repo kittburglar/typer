@@ -39,7 +39,6 @@ function love.draw()
 	    health.draw()
 	   	points.draw()
 	    texts.draw()
-	    points.draw()
 	    bomb.draw()
 	    
 	end

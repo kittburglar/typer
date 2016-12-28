@@ -12,7 +12,7 @@ function bullet.create(x, y, width, height, red, green, blue, speed, enemy)
         speed = speed,
         startTime = love.timer.getTime(),
         enemy = enemy,
-        bulletTime = .5
+        bulletTime = .2
     })
 end
 
@@ -31,8 +31,8 @@ end
 
 function bullet.draw()
     for i,b in ipairs(bullet) do
-            love.graphics.setColor(b.red, b.green, b.blue)
-            love.graphics.rectangle("fill", b.x, b.y, b.width, b.height)
-            love.graphics.setColor(234,234,234)
+        love.graphics.setColor(b.red, b.green, b.blue)
+        love.graphics.rectangle("fill", b.x, b.y, b.width, b.height)
+        love.graphics.setColor(234,234,234)
     end
 end
