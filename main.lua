@@ -6,6 +6,7 @@ require "health"
 require "points"
 require "texts"
 require "bullet"
+require "keyboard"
 require "bomb"
 
 
@@ -25,10 +26,7 @@ function love.draw()
         end
     end
 
-    -- Status bar on iOS
-    love.graphics.setColor(234,234,234)
-	love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), 20)
-	love.graphics.setColor(255, 255, 255)
+   
     
     if main.gameover then
     	restart.draw()
@@ -36,16 +34,19 @@ function love.draw()
     else
     	bullet.draw()
     	enemy.draw()
-    	
 	    player.draw()
     	explosion.draw()
-  
 	    texts.draw()
 	    health.draw()
 	    bomb.draw()
 	    points.draw()
 	end
-    
+	
+    keyboard.draw()
+     -- Status bar on iOS
+    love.graphics.setColor(234,234,234)
+	love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), 20)
+	love.graphics.setColor(255, 255, 255)
 end
 
 function love.load()
@@ -62,7 +63,7 @@ function love.load()
 	table.insert(background, love.graphics.newImage("background7.png"))
 	table.insert(background, love.graphics.newImage("background8.png"))
 
-
+	keyboard.load()
 	main.gameover = false;
 	enemy.load()
 	math.randomseed(os.time())
@@ -81,7 +82,7 @@ function love.load()
 end
 
 function love.update(dt)
-	love.keyboard.setTextInput(true)
+	-- love.keyboard.setTextInput(true)
 	timer = timer + dt * 7
 	backgroundImage = background[1 + math.floor(timer) % 8]
 	if not main.gameover then
