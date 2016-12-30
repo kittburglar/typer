@@ -98,7 +98,6 @@ function love.update(dt)
 end
 
 function love.keypressed( key )
-	enemy.keypressed(key)
 	if key == "space" then
 	 	bomb.keypressed(key)
 	end

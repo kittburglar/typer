@@ -15,22 +15,22 @@ function enemy.load()
     enemy.spawnTimer = love.timer.getTime()
 end
 
-function enemy.create(x, y, width, height, red, green, blue, word)
+function enemy.create(x, y, width, height, red, green, blue, layers, numberOfLayers)
     table.insert(enemy, {
         x = x,
         y = y,
-        word = word,
-        width = (string.len(word) * 5) * (love.graphics.getWidth() / 600),
-        height = (string.len(word) * 5) * (love.graphics.getWidth() / 600),
-        wordCorrectSoFar = " ",
-        wordRemaining = word,
+        layers = layers,
+        width = (numberOfLayers * 20) * (love.graphics.getWidth() / 600),
+        height = (numberOfLayers * 20) * (love.graphics.getWidth() / 600),
+        damageRecieved = 0,
+        healthpoints = numberOfLayers,
         red = red,
         green = green,
         blue = blue,
         speed = 0.6 + ((points.currentPoints)/100) * .05,
         deathAnimationTimer = 0,
         deathStartTime = 0,
-        points = enemy.getPoints(word)
+        points = points
     })
 end
 
@@ -52,18 +52,24 @@ function enemy.draw()
             love.graphics.rectangle("fill", e.x, e.y, e.width, e.height)
             love.graphics.setColor(234,234,234)
             love.graphics.rectangle("line", e.x, e.y, e.width, e.height)
-            love.graphics.print({{234,234,234}, string.upper(e.wordCorrectSoFar),  {health.red, health.green, health.blue}, string.upper(e.wordRemaining)} , e.x - 10 - (string.len(e.word)*20)/2 + e.width/2, e.y + e.height + 4)
+            love.graphics.print({{234,234,234}, string.upper(e.damageRecieved),  {health.red, health.green, health.blue}, string.upper(e.healthpoints)} , e.x - 10 - (string.len(e.word)*20)/2 + e.width/2, e.y + e.height + 4)
         elseif e.word == "bomb" then
             love.graphics.setColor(bomb.red, bomb.green, bomb.blue)
             love.graphics.rectangle("fill", e.x, e.y, e.width, e.height)
             love.graphics.setColor(234,234,234)
             love.graphics.rectangle("line", e.x, e.y, e.width, e.height)
-            love.graphics.print({{234,234,234}, string.upper(e.wordCorrectSoFar),  {bomb.red, bomb.green, bomb.blue}, string.upper(e.wordRemaining)} , e.x - 10 - (string.len(e.word)*20)/2 + e.width/2, e.y + e.height + 4)
+            love.graphics.print({{234,234,234}, string.upper(e.damageRecieved),  {bomb.red, bomb.green, bomb.blue}, string.upper(e.healthpoints)} , e.x - 10 - (string.len(e.word)*20)/2 + e.width/2, e.y + e.height + 4)
         else
-            love.graphics.setColor(e.red, e.green, e.blue)
-            love.graphics.rectangle("fill", e.x, e.y, e.width, e.height)
-            love.graphics.setColor(234,234,234)
-            love.graphics.print({{234,234,234}, string.upper(e.wordCorrectSoFar),  {e.red, e.green, e.blue}, string.upper(e.wordRemaining)} , e.x - 10 - (string.len(e.word)*20)/2 + e.width/2, e.y + e.height + 4)
+            for i = e.damageRecieved+1, e.healthpoints do
+                local enemyColor = enemyColors[e.layers[i]]
+                local layerOffset = (e.width/2) / e.healthpoints * (i-1)
+                love.graphics.setColor(enemyColor[1], enemyColor[2], enemyColor[3])
+                love.graphics.rectangle("fill", e.x + layerOffset, e.y + layerOffset, e.width - layerOffset*2, e.height - layerOffset*2)
+            end
+            -- love.graphics.setColor(e.red, e.green, e.blue)
+            -- love.graphics.rectangle("fill", e.x, e.y, e.width, e.height)
+            -- love.graphics.setColor(234,234,234)
+            -- love.graphics.print({{234,234,234}, string.upper(e.damageRecieved),  {e.red, e.green, e.blue}, string.upper(e.healthpoints)} , e.x - 10 - (string.len(e.word)*20)/2 + e.width/2, e.y + e.height + 4)
         end
         
         
@@ -73,48 +79,8 @@ end
 
 function enemy.resetAll()
     for i,e in ipairs(enemy) do
-        e.wordCorrectSoFar = " "
-        e.wordRemaining = e.word
-    end
-end
-
-function enemy.keypressed(key)
-    for i,e in ipairs(enemy) do
-        local enemyFirstLetter = e.wordRemaining:sub(0, 1 )
-        if enemyFirstLetter == key then
-            local restOfEnemyWord = e.wordRemaining:sub(2, string.len(e.wordRemaining))
-            e.wordCorrectSoFar = e.wordCorrectSoFar .. key
-            e.wordRemaining = restOfEnemyWord
-
-            --Hit Animation
-            explosion.spawn(e.x + e.width/2, e.y + e.height/2, 3, 3, e.red, e.green, e.blue, 2, 3, 10, 2)
-
-            bullet.create(player.x, player.y, 5, 5, 112,192,177, 30, e)
-        else --Mistyped enemy word
-        end
-
-        if e.wordRemaining == "" then
-            explosion.spawn(e.x + e.width/2, e.y + e.height/2, 4, 4, e.red, e.green, e.blue, 2.00, 3.00, 200, 3)
-            explosion.spawn(e.x + e.width/2, e.y + e.height/2, 4, 4, e.red, e.green, e.blue, 0, 1, 200, 15)
-
-            texts.spawn(e.x + e.width, e.y + e.height, 255, 255, 255, tostring(e.points * points.multiplier), 3)
-            points.multKillCount = points.multKillCount + 1
-            points.changed(e.points)
-            if points.multKillCount > points.multiplierKillNeeded then
-                points.setMultiplier(points.multiplier + 1)
-                points.multKillCount = 0
-                texts.spawn(e.x + e.width, e.y, 255, 255, 255, string.format("x%s", points.multiplier),3)
-            end
-
-            if e.word == "heal" then
-                health.change(health.lifepoints + 1)
-                texts.spawn(e.x + e.width, e.y - 20, 255, 255, 255, "health up",3)
-            elseif e.word == "bomb" then
-                bomb.change(bomb.bombpoints + 1)
-                texts.spawn(e.x + e.width, e.y - 20, 255, 255, 255, "bomb up",3)
-            end
-            table.remove(enemy, i)
-        end
+        e.damageRecieved = " "
+        e.healthpoints = e.word
     end
 end
 
@@ -136,35 +102,36 @@ function enemy.randomCreate()
 
     if directionSpawn == 0 then
         if spawnType == 0 then
-            enemy.create(-50, math.random(0, love.graphics.getHeight() - 216), 20, 20, health.red, health.green, health.blue, "heal") 
+            -- enemy.create(x, y, width, height, red, green, blue, layers, numberOfLayers)
+            -- enemy.create(-50, math.random(0, love.graphics.getHeight() - 216), 20, 20, health.red, health.green, health.blue, "heal") 
         elseif spawnType == 1 then
-            enemy.create(-50, math.random(0, love.graphics.getHeight() - 216), 20, 20, bomb.red, bomb.green, bomb.blue, "bomb") 
+            -- enemy.create(-50, math.random(0, love.graphics.getHeight() - 216), 20, 20, bomb.red, bomb.green, bomb.blue, "bomb") 
         else
-            enemy.create(-50, math.random(0, love.graphics.getHeight() - 216), 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord()) 
+            enemy.create(-50, math.random(0, love.graphics.getHeight() - 216), 20, 20, randomColor[1], randomColor[2], randomColor[3], {1, 2, 3}, 3) 
         end
     elseif directionSpawn == 1 then
         if spawnType == 0 then
-            enemy.create(math.random(0, love.graphics.getWidth()), -50, 20, 20, health.red, health.green, health.blue, "heal")
+            -- enemy.create(math.random(0, love.graphics.getWidth()), -50, 20, 20, health.red, health.green, health.blue, "heal")
         elseif spawnType == 1 then
-            enemy.create(math.random(0, love.graphics.getWidth()), -50, 20, 20, bomb.red, bomb.green, bomb.blue, "bomb")
+            -- enemy.create(math.random(0, love.graphics.getWidth()), -50, 20, 20, bomb.red, bomb.green, bomb.blue, "bomb")
         else
-            enemy.create(math.random(0, love.graphics.getWidth()), -50, 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord())
+            enemy.create(math.random(0, love.graphics.getWidth()), -50, 20, 20, randomColor[1], randomColor[2], randomColor[3], {1, 2, 3}, 3)
         end
     elseif directionSpawn == 2 then
         if spawnType == 0 then
-            enemy.create(love.graphics.getWidth(), math.random(0, love.graphics.getHeight() - 216), 20, 20, health.red, health.green, health.blue, "heal")
+            -- enemy.create(love.graphics.getWidth(), math.random(0, love.graphics.getHeight() - 216), 20, 20, health.red, health.green, health.blue, "heal")
         elseif spawnType == 1 then
-            enemy.create(love.graphics.getWidth(), math.random(0, love.graphics.getHeight() - 216), 20, 20, bomb.red, bomb.green, bomb.blue, "bomb")
+            -- enemy.create(love.graphics.getWidth(), math.random(0, love.graphics.getHeight() - 216), 20, 20, bomb.red, bomb.green, bomb.blue, "bomb")
         else
-            enemy.create(love.graphics.getWidth(), math.random(0, love.graphics.getHeight() - 216), 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord())
+            enemy.create(love.graphics.getWidth(), math.random(0, love.graphics.getHeight() - 216), 20, 20, randomColor[1], randomColor[2], randomColor[3], {1, 2, 3}, 3)
         end
     elseif directionSpawn == 3 then
         if spawnType == 0 then
-            enemy.create(math.random(0, love.graphics.getWidth()), love.graphics.getHeight() - 216, 20, 20, health.red, health.green, health.blue, "heal")
+            -- enemy.create(math.random(0, love.graphics.getWidth()), love.graphics.getHeight() - 216, 20, 20, health.red, health.green, health.blue, "heal")
         elseif spawnType == 1 then
-            enemy.create(math.random(0, love.graphics.getWidth()), love.graphics.getHeight() - 216, 20, 20, bomb.red, bomb.green, bomb.blue, "bomb")
+            -- enemy.create(math.random(0, love.graphics.getWidth()), love.graphics.getHeight() - 216, 20, 20, bomb.red, bomb.green, bomb.blue, "bomb")
         else
-            enemy.create(math.random(0, love.graphics.getWidth()), love.graphics.getHeight() - 216, 20, 20, randomColor[1], randomColor[2], randomColor[3], words.getRandomWord())
+            enemy.create(math.random(0, love.graphics.getWidth()), love.graphics.getHeight() - 216, 20, 20, randomColor[1], randomColor[2], randomColor[3], {1, 2, 3}, 3)
         end
     end
 end
@@ -179,8 +146,26 @@ function enemy.spawnCheck()
         end
 end
 
--- F ×2, H ×2, V ×2, W ×2, Y ×2
+function enemy.pressedButton(button)
+    -- {1, 2, 3}
+    print("Button pressed is: ", button)
+    for i,e in ipairs(enemy) do
+        print(e.layers[e.damageRecieved+1])
+        if e.layers[e.damageRecieved+1] == button then
+            local enemyColor = enemyColors[e.layers[e.damageRecieved+1]]
+            e.damageRecieved = e.damageRecieved + 1
+            explosion.spawn(e.x + e.width/2, e.y + e.height/2, 5, 5, enemyColor[1], enemyColor[2], enemyColor[3], 2, 3, 100, 3)
+            bullet.create(player.x, player.y, 5, 5, 112, 192, 177, 30, e)
+            if e.damageRecieved == e.healthpoints then
+                explosion.spawn(e.x + e.width/2, e.y + e.height/2, 4, 4, enemyColor[1], enemyColor[2], enemyColor[3], 2.00, 3.00, 200, 3)
+                explosion.spawn(e.x + e.width/2, e.y + e.height/2, 4, 4, enemyColor[1], enemyColor[2], enemyColor[3], 0, 1, 200, 15)
+                enemy.remove(i)
+            end
+        end
+    end 
+end
 
+-- F ×2, H ×2, V ×2, W ×2, Y ×2
 function enemy.getPoints(word)
     local points = 0
     for i = 1, string.len(word) do

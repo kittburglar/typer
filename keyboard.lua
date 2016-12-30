@@ -1,4 +1,5 @@
 require "helper"
+require "enemy"
 
 keyboard = {}
 local keyPadding = 10
@@ -26,43 +27,49 @@ function keyboard.update(dt)
 	if love.mouse.isDown(1) then
 		if helper.isPointInRect(love.mouse.getX(), love.mouse.getY(), keyboard.firstButton["x"], keyboard.firstButton["y"], keyboard.firstButton["width"], keyboard.firstButton["height"]) then
 		    print("first button")
+		    enemy.pressedButton(1)
 		    if keyboard.firstButton["startTime"] == nil then
 		        keyboard.firstButton["y"] = keyboard.firstButton["y"] + keyShadePadding
 		    	keyboard.firstButton["startTime"] = love.timer.getTime()
 		    end
-		    
 		elseif helper.isPointInRect(love.mouse.getX(), love.mouse.getY(), keyboard.secondButton["x"], keyboard.secondButton["y"], keyboard.secondButton["width"], keyboard.secondButton["height"]) then
 		    print("second button")
+		    enemy.pressedButton(2)
 		    if keyboard.secondButton["startTime"] == nil then
 		        keyboard.secondButton["y"] = keyboard.secondButton["y"] + keyShadePadding
 		    	keyboard.secondButton["startTime"] = love.timer.getTime()
 		    end
 		elseif helper.isPointInRect(love.mouse.getX(), love.mouse.getY(), keyboard.thirdButton["x"], keyboard.thirdButton["y"], keyboard.thirdButton["width"], keyboard.thirdButton["height"]) then
 		    print("third button")
+		    enemy.pressedButton(3)
 		    if keyboard.thirdButton["startTime"] == nil then
 		        keyboard.thirdButton["y"] = keyboard.thirdButton["y"] + keyShadePadding
 		    	keyboard.thirdButton["startTime"] = love.timer.getTime()
 		    end
 		elseif helper.isPointInRect(love.mouse.getX(), love.mouse.getY(), keyboard.fourthButton["x"], keyboard.fourthButton["y"], keyboard.fourthButton["width"], keyboard.fourthButton["height"]) then
 		    print("fourth button")
+		    enemy.pressedButton(4)
 		    if keyboard.fourthButton["startTime"] == nil then
 		        keyboard.fourthButton["y"] = keyboard.fourthButton["y"] + keyShadePadding
 		    	keyboard.fourthButton["startTime"] = love.timer.getTime()
 		    end
 		elseif helper.isPointInRect(love.mouse.getX(), love.mouse.getY(), keyboard.fifthButton["x"], keyboard.fifthButton["y"], keyboard.fifthButton["width"], keyboard.fifthButton["height"]) then
 		    print("fifth button")
+		    enemy.pressedButton(5)
 		    if keyboard.fifthButton["startTime"] == nil then
 		        keyboard.fifthButton["y"] = keyboard.fifthButton["y"] + keyShadePadding
 		    	keyboard.fifthButton["startTime"] = love.timer.getTime()
 		    end
 		elseif helper.isPointInRect(love.mouse.getX(), love.mouse.getY(), keyboard.sixthButton["x"], keyboard.sixthButton["y"], keyboard.sixthButton["width"], keyboard.sixthButton["height"]) then
 		    print("sixth button") 
+		    enemy.pressedButton(6)
 		    if keyboard.sixthButton["startTime"] == nil then
 		        keyboard.sixthButton["y"] = keyboard.sixthButton["y"] + keyShadePadding
 		    	keyboard.sixthButton["startTime"] = love.timer.getTime()
 		    end
 		elseif helper.isPointInRect(love.mouse.getX(), love.mouse.getY(), keyboard.seventhButton["x"], keyboard.seventhButton["y"], keyboard.seventhButton["width"], keyboard.seventhButton["height"]) then
-		    print("seventh button")  
+		    print("seventh button")
+		    enemy.pressedButton(7)
 		    if keyboard.seventhButton["startTime"] == nil then
 		        keyboard.seventhButton["y"] = keyboard.seventhButton["y"] + keyShadePadding
 		    	keyboard.seventhButton["startTime"] = love.timer.getTime()
