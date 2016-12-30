@@ -29,10 +29,7 @@ end
 function player.checkCollision()
 	for i,e in ipairs(enemy) do
         if (helper.collisionDetection(e, player)) then
-        	enemy.remove(i)
         	if health.wasUpdated == NO then
-        		explosion.spawn(e.x + e.width/2, e.y + e.height/2, 5, 5, e.red, e.green, e.blue, 2.00, 3.00, 100, 2)
-            	explosion.spawn(e.x + e.width/2, e.y + e.height/2, 7, 7, e.red, e.green, e.blue, 0, 1, 10, 2)
         		explosion.spawn(player.x + player.width/2, player.y + player.height/2, 3, 3, player.red, player.green, player.blue, 2.00, 3.00, 10, 2)
         		if e.word == "heal" then
                 	health.change(health.lifepoints + 1)
@@ -43,8 +40,10 @@ function player.checkCollision()
         			
         			explosion.spawn(player.x + player.width/2, player.y + player.height/2, 5, 5, player.red, player.green, player.blue, 15, 16, 100, 2)
 				    for i,e in ipairs(enemy) do
-			        explosion.spawn(e.x + e.width/2, e.y + e.height/2, 5, 5, e.red, e.green, e.blue, 2.00, 3.00, 100, 2)
-			        explosion.spawn(e.x + e.width/2, e.y + e.height/2, 7, 7, e.red, e.green, e.blue, 0, 1, 10, 2)
+				        for j = e.damageRecieved+1, e.healthpoints do
+			                local enemyColor = enemyColors[e.layers[j]]
+			                explosion.spawn(e.x + e.width/2, e.y + e.height/2, 5, 5, enemyColor[1], enemyColor[2], enemyColor[3], 2.00, 3.00, 100, 2)
+			            end
 			        enemy[i] = nil
 			    	end
         		end
@@ -52,6 +51,7 @@ function player.checkCollision()
         	 	points.setMultiplier(1)
         	 	points.multKillCount = 0
         	end
+        	enemy.remove(i)
         end
     end
 end
