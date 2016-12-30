@@ -41,7 +41,7 @@ function love.draw()
 	    bomb.draw()
 	    points.draw()
 	end
-	
+
     keyboard.draw()
      -- Status bar on iOS
     love.graphics.setColor(234,234,234)
@@ -92,6 +92,7 @@ function love.update(dt)
 		health.update(dt)	
 		bullet.update(dt)
 	end
+	keyboard.update(dt)
 	explosion.update(dt)
 	texts.update(dt)
 end
