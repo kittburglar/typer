@@ -145,11 +145,12 @@ function enemy.pressedButton(button)
             local enemyColor = enemyColors[e.layers[e.damageRecieved+1]]
             e.damageRecieved = e.damageRecieved + 1
             explosion.spawn(e.x + e.width/2, e.y + e.height/2, 5, 5, enemyColor[1], enemyColor[2], enemyColor[3], 2.0, 4.0, 100, 2)
-            bullet.create(player.x, player.y, 5, 5, 112, 192, 177, 30, e)
+            bullet.create(player.x, player.y, 5, 5, enemyColor[1], enemyColor[2], enemyColor[3], 30, e)
+            player.rotation = math.atan2(e.y - player.y, e.x - player.x);
             if e.damageRecieved == e.healthpoints then
                 points.multKillCount = points.multKillCount + 1
                 points.changed(e.points)
-                texts.spawn(e.x + e.width, e.y, 255, 255, 255, string.format("%s", e.points),3)
+                texts.spawn(e.x + e.width, e.y + 20, 255, 255, 255, string.format("%s", e.points),3)
                 if points.multKillCount > points.multiplierKillNeeded then
                     points.setMultiplier(points.multiplier + 1)
                     points.multKillCount = 0

@@ -1,25 +1,30 @@
 require "helper"
 require "explosion"
 require "points"
+require "bullet"
 
 player = {}
 
 function player.draw()
-	love.graphics.setColor(player.red, player.green, player.blue)
-    love.graphics.rectangle("fill", player.x, player.y, player.width, player.height)
-    love.graphics.setColor(112,192,177)
-    love.graphics.rectangle("fill", player.x + player.width/2 - 10/2, player.y + player.height/2 - 10/2, 10, 10)
+	-- love.graphics.setColor(player.red, player.green, player.blue)
+ --    love.graphics.rectangle("fill", player.x, player.y, player.width, player.height)
+ --    love.graphics.setColor(112,192,177)
+ --    love.graphics.rectangle("fill", player.x + player.width/2 - 10/2, player.y + player.height/2 - 10/2, 10, 10)
+	love.graphics.setColor(255, 255, 255)
+	love.graphics.draw(player.image, player.x, player.y, player.rotation, 1, 1, player.width/2, player.height/2, 0, 0)
 end
 
 function player.load()
-	player.width = 25 * (love.graphics.getWidth() / 600)
-	player.height = 25 * (love.graphics.getWidth() / 600)
-	print(love.graphics.getWidth())
-	player.x = love.graphics.getWidth()/2 - player.width/2 
-	player.y = love.graphics.getHeight()/2 - player.height/2 - 216 /2
+	player.image = love.graphics.newImage("player.png")
+	player.width = player.image:getWidth() 
+	player.height = player.image:getHeight()
+	print("player width is: ", player.width)
+	player.x = love.graphics.getWidth()/2
+	player.y = love.graphics.getHeight()/2 - 216 /2
 	player.red = 234
 	player.green = 234
 	player.blue = 234
+	player.rotation = 0
 end
 
 function player.update(dt)

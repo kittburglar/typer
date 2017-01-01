@@ -1,7 +1,7 @@
 points = {}
 points.wasUpdated = NO
 points.multKillCount = 0
-points.multiplierKillNeeded = 2
+points.multiplierKillNeeded = 5
 function points.load()
 	points.currentPoints = 0
 	points.multiplier = 1
