@@ -140,17 +140,19 @@ function keyboard.draw()
 	love.graphics.rectangle("fill", keyboard.fourthButton["x"], keyboard.fourthButton["y"], keyboard.fourthButton["width"], keyboard.fourthButton["height"] - keyShadePadding, 10, 10)
 	-- fifth button
 	if keyboard.fifthButton["startTime"] == nil then
-	   love.graphics.setColor(85,115,152)
+	    love.graphics.setColor(78,134,123)
 		love.graphics.rectangle("fill", keyboard.fifthButton["x"], keyboard.fifthButton["y"], keyboard.fifthButton["width"], keyboard.fifthButton["height"], 10, 10)
 	end
-	love.graphics.setColor(122,166,218)
+	love.graphics.setColor(112,192,177)
 	love.graphics.rectangle("fill", keyboard.fifthButton["x"], keyboard.fifthButton["y"], keyboard.fifthButton["width"], keyboard.fifthButton["height"] - keyShadePadding, 10, 10)
 	-- sixth button
 	if keyboard.sixthButton["startTime"] == nil then
-	   love.graphics.setColor(78,134,123)
+	   
+	   love.graphics.setColor(85,115,152)
 		love.graphics.rectangle("fill", keyboard.sixthButton["x"], keyboard.sixthButton["y"], keyboard.sixthButton["width"], keyboard.sixthButton["height"], 10, 10)
 	end
-	love.graphics.setColor(112,192,177)
+	
+	love.graphics.setColor(122,166,218)
 	love.graphics.rectangle("fill", keyboard.sixthButton["x"], keyboard.sixthButton["y"], keyboard.sixthButton["width"], keyboard.sixthButton["height"] - keyShadePadding, 10, 10)
 	-- seventh button
 	if keyboard.seventhButton["startTime"] == nil then
