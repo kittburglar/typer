@@ -149,8 +149,8 @@ function enemy.pressedButton(button)
             player.rotation = math.atan2(e.y - player.y, e.x - player.x);
             if e.damageRecieved == e.healthpoints then
                 points.multKillCount = points.multKillCount + 1
-                points.changed(e.points)
-                texts.spawn(e.x + e.width, e.y + 20, 255, 255, 255, string.format("%s", e.points),3)
+                points.changed(e.points * points.multiplier)
+                texts.spawn(e.x + e.width, e.y + 20, 255, 255, 255, string.format("%s", e.points * points.multiplier),3)
                 if points.multKillCount > points.multiplierKillNeeded then
                     points.setMultiplier(points.multiplier + 1)
                     points.multKillCount = 0
